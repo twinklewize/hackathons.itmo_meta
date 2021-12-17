@@ -102,7 +102,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
-<<<<<<< HEAD
   nested:
     dependency: transitive
     description:
@@ -110,8 +109,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
-=======
->>>>>>> main
   path:
     dependency: transitive
     description:
@@ -119,7 +116,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
-<<<<<<< HEAD
   provider:
     dependency: "direct main"
     description:
@@ -127,8 +123,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.0.1"
-=======
->>>>>>> main
   sky_engine:
     dependency: transitive
     description: flutter
@@ -191,9 +185,5 @@ packages:
     source: hosted
     version: "2.1.1"
 sdks:
-<<<<<<< HEAD
   dart: ">=2.16.0-56.0.dev <3.0.0"
   flutter: ">=1.16.0"
-=======
-  dart: ">=2.14.0 <3.0.0"
->>>>>>> main
