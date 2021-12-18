@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ict_hack/features/market/ingame_categories_widget.dart';
-import 'package:ict_hack/features/market/real_categories_widget.dart';
+import 'package:ict_hack/features/market/components/ingame_categories_widget.dart';
+import 'package:ict_hack/features/market/components/real_categories_widget.dart';
 
 class MarketPage extends StatelessWidget {
   const MarketPage({Key? key}) : super(key: key);

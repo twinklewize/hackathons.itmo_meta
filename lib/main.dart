@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ict_hack/features/market/market_page.dart';
+import 'package:ict_hack/features/account/my_account_page.dart';
+import 'package:ict_hack/providers/my_account_provider.dart';
+import 'package:ict_hack/features/home_page/home_page.dart';
 import 'package:ict_hack/providers/market_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -17,13 +19,17 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: MarketProvider(),
         ),
+        ChangeNotifierProvider.value(
+          value: MyAccountProvider(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: MarketPage(),
+        home: HomePage(),
       ),
     );
   }

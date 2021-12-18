@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ict_hack/features/market/single_category_page.dart';
+import 'package:ict_hack/features/market/components/single_category_page.dart';
 
 class MarketCategoryWidget extends StatelessWidget {
   MarketCategoryWidget({
