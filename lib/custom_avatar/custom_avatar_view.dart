@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:itmo_meta/custom_avatar/custom_avatar_view_model.dart';
+import 'package:itmo_meta/ui_kit/avatar/user_avatar_assets.dart';
 import 'package:itmo_meta/ui_kit/constants/app_colors.dart';
 import 'package:itmo_meta/ui_kit/widgets/custom_avatar.dart';
 import 'package:itmo_meta/ui_kit/widgets/custom_text_field.dart';
@@ -45,8 +46,8 @@ class CustomAvatarView extends StatelessWidget {
         children: [
           const SizedBox(height: 8),
           CustomAvatar(
-            backgroundColor: provider.backgroundColors[provider.backgroundId],
-            height: 200,
+            backgroundColorId: provider.backgroundId,
+            avatarHeight: 200,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 64, vertical: 32),
@@ -135,7 +136,7 @@ class _TabsWithAvatarElementsState extends State<TabsWithAvatarElements>
               children: [
                 BackgroundGridView(
                   onTap: provider.setBackgroundId,
-                  colors: provider.backgroundColors,
+                  colors: UserAvatarAssets.backgroundColors,
                 ),
                 Text('Second'),
                 Text('Third'),
