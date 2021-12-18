@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ict_hack/features/home_page/home_page.dart';
 import 'package:provider/provider.dart';
 
+import '../../providers/user_provider.dart';
 import '../../ui_kit/avatar/user_avatar_assets.dart';
 import '../../ui_kit/constants/app_colors.dart';
 import '../../ui_kit/widgets/custom_avatar.dart';
@@ -9,12 +10,24 @@ import '../../ui_kit/widgets/custom_text_field.dart';
 import 'custom_avatar_view_model.dart';
 
 class CustomAvatarView extends StatelessWidget {
-  CustomAvatarView({Key? key}) : super(key: key);
-  final nicknameController = TextEditingController();
+  final bool newAvatar;
+  final String? nick;
+  late final nicknameController;
+
+  CustomAvatarView({
+    Key? key,
+    required this.newAvatar,
+    this.nick,
+  }) : super(key: key) {
+    nicknameController =
+        newAvatar ? TextEditingController() : TextEditingController(text: nick);
+  }
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<CustomAvatarViewModel>(context);
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    provider.setUserAvatar(userProvider.userEntity.userAvatar);
     return Scaffold(
       backgroundColor: AppColors.backgroundLight,
       resizeToAvoidBottomInset: false,
@@ -25,15 +38,9 @@ class CustomAvatarView extends StatelessWidget {
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: AppColors.textColor,
-          ),
-          onPressed: () {
-            // Navigator.of(context).pop();
-          },
-        ),
+        foregroundColor: AppColors.textColor,
+
+        // Подтвердить
         actions: [
           IconButton(
             icon: const Icon(
@@ -41,13 +48,20 @@ class CustomAvatarView extends StatelessWidget {
               color: AppColors.textColor,
             ),
             onPressed: () {
+              if (nicknameController.text == '') return;
               provider.setNickname(nicknameController.text);
-              provider.createAvatar();
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute<void>(
-                  builder: (BuildContext context) => const HomePage(),
-                ),
-              );
+
+              userProvider.setUserAvatar(provider.userAvatar);
+              userProvider.setUserNickname(provider.nickname);
+
+              // Переход на новую страницу
+              newAvatar
+                  ? Navigator.of(context).pushReplacement(
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) => const HomePage(),
+                      ),
+                    )
+                  : Navigator.of(context).pop();
             },
           ),
         ],
@@ -58,19 +72,16 @@ class CustomAvatarView extends StatelessWidget {
 
           // Аватар
           CustomAvatar(
-            backgroundColorId: provider.backgroundColorId,
             avatarHeight: 200,
-            hairstyleId: provider.hairstyleId,
-            bodyId: provider.bodyId,
-            browsId: provider.browsId,
-            eyesId: provider.eyesId,
-            mouthId: provider.mouthId,
+            userAvatar: provider.userAvatar,
           ),
 
           // Текстовое поле
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 64, vertical: 32),
-            child: CustomTextField(controller: nicknameController),
+            child: CustomTextField(
+              controller: nicknameController,
+            ),
           ),
 
           // Изменение вида аватара
@@ -167,32 +178,32 @@ class _TabsWithAvatarElementsState extends State<TabsWithAvatarElements>
               ColorGridView(
                 onTap: provider.setBackgroundId,
                 colors: UserAvatarAssets.backgroundColors,
-                id: provider.backgroundColorId,
+                id: provider.userAvatar.backgroundColorId,
               ),
               AssetGridView(
                 onTap: provider.setBodyId,
                 assets: UserAvatarAssets.bodies,
-                id: provider.bodyId,
+                id: provider.userAvatar.bodyId,
               ),
               AssetGridView(
                 onTap: provider.setHairstyleId,
                 assets: UserAvatarAssets.hairstyles,
-                id: provider.hairstyleId,
+                id: provider.userAvatar.hairstyleId,
               ),
               AssetGridView(
                 onTap: provider.setEyesId,
                 assets: UserAvatarAssets.eyes,
-                id: provider.eyesId,
+                id: provider.userAvatar.eyesId,
               ),
               AssetGridView(
                 onTap: provider.setBrowsId,
                 assets: UserAvatarAssets.brows,
-                id: provider.browsId,
+                id: provider.userAvatar.browsId,
               ),
               AssetGridView(
                 onTap: provider.setMouthId,
                 assets: UserAvatarAssets.mouths,
-                id: provider.mouthId,
+                id: provider.userAvatar.mouthId,
               ),
             ],
           ),

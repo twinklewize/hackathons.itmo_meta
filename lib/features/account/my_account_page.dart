@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ict_hack/features/account/components/my_post_item.dart';
+import 'package:ict_hack/features/custom_avatar/custom_avatar_view.dart';
 import 'package:ict_hack/providers/my_account_provider.dart';
-import 'package:ict_hack/ui_kit/half_long_button.dart';
+import 'package:ict_hack/providers/user_provider.dart';
+import 'package:ict_hack/ui_kit/widgets/custom_avatar.dart';
 import 'package:provider/provider.dart';
 
 class MyAccountPage extends StatelessWidget {
@@ -9,14 +11,15 @@ class MyAccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context).userEntity;
     var appBar = AppBar(
       title: const Text('Мой профиль'),
       actions: [
         Row(
-          children: [
-            Text('1000' + ' 🪙'),
+          children: const [
+            Text('1000 🪙'),
             SizedBox(width: 12),
-            Text('35' + ' 💎'),
+            Text('35 💎'),
             SizedBox(width: 12),
           ],
         ),
@@ -28,16 +31,12 @@ class MyAccountPage extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 12),
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                width: MediaQuery.of(context).size.width - 24,
-                height: MediaQuery.of(context).size.width - 24,
-                color: Colors.green,
-              ),
+            CustomAvatar(
+              avatarHeight: MediaQuery.of(context).size.width - 24,
+              userAvatar: user.userAvatar,
             ),
             const SizedBox(height: 24),
-            Divider(thickness: 1),
+            const Divider(thickness: 1),
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(
@@ -46,16 +45,25 @@ class MyAccountPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "xxx_nagibatel_3000_xxx",
-                      style: TextStyle(
+                      user.nickname,
+                      style: const TextStyle(
                         fontSize: 20,
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     TextButton(
-                      onPressed: () {},
-                      child: Text(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute<void>(
+                            builder: (BuildContext context) => CustomAvatarView(
+                              newAvatar: false,
+                              nick: user.nickname,
+                            ),
+                          ),
+                        );
+                      },
+                      child: const Text(
                         'изм.',
                         style: TextStyle(
                           fontSize: 16,
@@ -67,33 +75,33 @@ class MyAccountPage extends StatelessWidget {
                 ),
               ),
             ),
-            Divider(),
+            const Divider(),
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Row(
                   children: [
-                    Text(
+                    const Text(
                       "Ваш номер в ИСУ:",
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.black,
                       ),
                     ),
-                    SizedBox(width: 12),
+                    const SizedBox(width: 12),
                     Text(
-                      '285442',
-                      style: TextStyle(
+                      user.id.toString(),
+                      style: const TextStyle(
                         fontSize: 20,
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     TextButton(
                       onPressed: () {},
-                      child: Text(
+                      child: const Text(
                         'выйти',
                         style: TextStyle(
                           fontSize: 16,
@@ -105,8 +113,8 @@ class MyAccountPage extends StatelessWidget {
                 ),
               ),
             ),
-            Divider(thickness: 1),
-            SizedBox(height: 24),
+            const Divider(thickness: 1),
+            const SizedBox(height: 24),
             for (var post in Provider.of<MyAccountProvider>(context).posts)
               MyPostItem(post: post),
           ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ict_hack/entities/user_avatar_entity.dart';
 
 import '../avatar/user_avatar_assets.dart';
 
@@ -6,31 +7,11 @@ class CustomAvatar extends StatelessWidget {
   const CustomAvatar({
     Key? key,
     this.avatarHeight = 48,
-    required this.backgroundColorId,
-    this.bodyId = 0,
-    this.browsId = 0,
-    this.eyesId = 0,
-    this.hairstyleId = 0,
-    this.mouthId = 0,
-    this.tShirtId = 0,
-    this.pantsId = 0,
-    this.bootsId = 0,
-    this.glassesId = -1,
+    required this.userAvatar,
   }) : super(key: key);
 
+  final UserAvatarEntity userAvatar;
   final double avatarHeight;
-
-  final int backgroundColorId;
-  final int bodyId;
-  final int browsId;
-  final int eyesId;
-  final int hairstyleId;
-  final int mouthId;
-
-  final int pantsId;
-  final int tShirtId;
-  final int bootsId;
-  final int glassesId;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +20,7 @@ class CustomAvatar extends StatelessWidget {
       height: avatarHeight,
       width: avatarHeight,
       decoration: BoxDecoration(
-        color: UserAvatarAssets.backgroundColors[backgroundColorId],
+        color: UserAvatarAssets.backgroundColors[userAvatar.backgroundColorId],
         shape: BoxShape.circle,
       ),
       child: Stack(
@@ -50,7 +31,7 @@ class CustomAvatar extends StatelessWidget {
             right: 0.125 * avatarHeight,
             top: 0.1 * avatarHeight,
             height: 0.8 * avatarHeight,
-            child: Image.asset(UserAvatarAssets.bodies[bodyId]),
+            child: Image.asset(UserAvatarAssets.bodies[userAvatar.bodyId]),
           ),
 
           // Румяна
@@ -68,7 +49,7 @@ class CustomAvatar extends StatelessWidget {
             right: 0.125 * avatarHeight,
             height: 0.11 * avatarHeight,
             top: 0.41 * avatarHeight,
-            child: Image.asset(UserAvatarAssets.mouths[mouthId]),
+            child: Image.asset(UserAvatarAssets.mouths[userAvatar.mouthId]),
           ),
 
           // Глаза
@@ -77,7 +58,7 @@ class CustomAvatar extends StatelessWidget {
             right: 0.125 * avatarHeight,
             height: 0.1 * avatarHeight,
             top: 0.28 * avatarHeight,
-            child: Image.asset(UserAvatarAssets.eyes[eyesId]),
+            child: Image.asset(UserAvatarAssets.eyes[userAvatar.eyesId]),
           ),
 
           // Брови
@@ -86,28 +67,30 @@ class CustomAvatar extends StatelessWidget {
             right: 0.125 * avatarHeight,
             height: 0.038 * avatarHeight,
             top: 0.24 * avatarHeight,
-            child: Image.asset(UserAvatarAssets.brows[browsId]),
+            child: Image.asset(UserAvatarAssets.brows[userAvatar.browsId]),
           ),
 
           // Очки
-          glassesId != -1
+          userAvatar.glassesId != -1
               ? Positioned(
                   left: 0.125 * avatarHeight,
                   right: 0.125 * avatarHeight,
                   height: 0.14 * avatarHeight,
                   top: 0.26 * avatarHeight,
-                  child: Image.asset(UserAvatarAssets.glasses[glassesId]),
+                  child: Image.asset(
+                      UserAvatarAssets.glasses[userAvatar.glassesId]),
                 )
               : const SizedBox(),
 
           // Волосы
-          hairstyleId != -1
+          userAvatar.hairstyleId != -1
               ? Positioned(
                   left: 0.125 * avatarHeight,
                   right: 0.125 * avatarHeight,
                   height: 0.26 * avatarHeight,
                   top: 0.07 * avatarHeight,
-                  child: Image.asset(UserAvatarAssets.hairstyles[hairstyleId]),
+                  child: Image.asset(
+                      UserAvatarAssets.hairstyles[userAvatar.hairstyleId]),
                 )
               : const SizedBox(),
 
@@ -121,18 +104,19 @@ class CustomAvatar extends StatelessWidget {
           ),
 
           // Обувь
-          hairstyleId != -1
+          userAvatar.hairstyleId != -1
               ? Positioned(
                   left: 0.125 * avatarHeight,
                   right: 0.125 * avatarHeight,
                   height: 0.03 * avatarHeight,
                   top: 0.84 * avatarHeight,
-                  child: Image.asset(UserAvatarAssets.boots[bootsId]),
+                  child:
+                      Image.asset(UserAvatarAssets.boots[userAvatar.bootsId]),
                 )
               : const SizedBox(),
 
           // Штаны
-          hairstyleId != -1
+          userAvatar.hairstyleId != -1
               ? Positioned(
                   left: 0.125 * avatarHeight,
                   right: 0.125 * avatarHeight,
@@ -143,13 +127,14 @@ class CustomAvatar extends StatelessWidget {
               : const SizedBox(),
 
           // Футболка
-          hairstyleId != -1
+          userAvatar.hairstyleId != -1
               ? Positioned(
                   left: 0.134 * avatarHeight,
                   right: 0.125 * avatarHeight,
                   height: 0.228 * avatarHeight,
                   top: 0.49 * avatarHeight,
-                  child: Image.asset(UserAvatarAssets.tShirts[tShirtId]),
+                  child: Image.asset(
+                      UserAvatarAssets.tShirts[userAvatar.tShirtId]),
                 )
               : const SizedBox(),
         ],
