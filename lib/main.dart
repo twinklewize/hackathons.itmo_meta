@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ict_hack/features/account/my_account_page.dart';
-import 'package:ict_hack/providers/my_account_provider.dart';
-import 'package:ict_hack/features/home_page/home_page.dart';
-import 'package:ict_hack/providers/market_provider.dart';
+
+import 'features/home_page/home_page.dart';
+import 'providers/market_provider.dart';
+import 'providers/my_account_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() {
