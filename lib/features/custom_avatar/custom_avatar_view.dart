@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:itmo_meta/custom_avatar/custom_avatar_view_model.dart';
-import 'package:itmo_meta/ui_kit/avatar/user_avatar_assets.dart';
-import 'package:itmo_meta/ui_kit/constants/app_colors.dart';
-import 'package:itmo_meta/ui_kit/widgets/custom_avatar.dart';
-import 'package:itmo_meta/ui_kit/widgets/custom_text_field.dart';
+import 'package:ict_hack/features/home_page/home_page.dart';
 import 'package:provider/provider.dart';
+
+import '../../ui_kit/avatar/user_avatar_assets.dart';
+import '../../ui_kit/constants/app_colors.dart';
+import '../../ui_kit/widgets/custom_avatar.dart';
+import '../../ui_kit/widgets/custom_text_field.dart';
+import 'custom_avatar_view_model.dart';
 
 class CustomAvatarView extends StatelessWidget {
   CustomAvatarView({Key? key}) : super(key: key);
@@ -43,7 +45,7 @@ class CustomAvatarView extends StatelessWidget {
               provider.createAvatar();
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute<void>(
-                  builder: (BuildContext context) => CustomAvatarView(),
+                  builder: (BuildContext context) => const HomePage(),
                 ),
               );
             },
@@ -119,84 +121,83 @@ class _TabsWithAvatarElementsState extends State<TabsWithAvatarElements>
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<CustomAvatarViewModel>(context);
-    return Expanded(
-      child: Column(
-        children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.height,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TabBar(
-                  isScrollable: true,
-                  unselectedLabelColor: AppColors.textColor.withOpacity(0.5),
-                  indicatorColor: AppColors.primary,
-                  indicatorWeight: 4,
-                  controller: tabController,
-                  tabs: const [
-                    Tab(
-                      text: 'Цвет фона',
-                    ),
-                    Tab(
-                      text: 'Тело',
-                    ),
-                    Tab(
-                      text: 'Волосы',
-                    ),
-                    Tab(
-                      text: 'Глаза',
-                    ),
-                    Tab(
-                      text: 'Брови',
-                    ),
-                    Tab(
-                      text: 'Рот',
-                    ),
-                  ],
-                ),
-                Divider(height: 1, color: AppColors.textColor.withOpacity(0.2)),
-              ],
-            ),
+    return Column(
+      children: [
+        SizedBox(
+          width: MediaQuery.of(context).size.height,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TabBar(
+                isScrollable: true,
+                unselectedLabelColor: AppColors.textColor.withOpacity(0.5),
+                indicatorColor: AppColors.primary,
+                labelColor: AppColors.primary,
+                indicatorWeight: 4,
+                controller: tabController,
+                tabs: const [
+                  Tab(
+                    text: 'Цвет фона',
+                  ),
+                  Tab(
+                    text: 'Тело',
+                  ),
+                  Tab(
+                    text: 'Волосы',
+                  ),
+                  Tab(
+                    text: 'Глаза',
+                  ),
+                  Tab(
+                    text: 'Брови',
+                  ),
+                  Tab(
+                    text: 'Рот',
+                  ),
+                ],
+              ),
+              Divider(height: 1, color: AppColors.textColor.withOpacity(0.2)),
+            ],
           ),
-          Expanded(
-            child: TabBarView(
-              controller: tabController,
-              children: [
-                ColorGridView(
-                  onTap: provider.setBackgroundId,
-                  colors: UserAvatarAssets.backgroundColors,
-                  id: provider.backgroundColorId,
-                ),
-                AssetGridView(
-                  onTap: provider.setBodyId,
-                  assets: UserAvatarAssets.bodies,
-                  id: provider.bodyId,
-                ),
-                AssetGridView(
-                  onTap: provider.setHairstyleId,
-                  assets: UserAvatarAssets.hairstyles,
-                  id: provider.hairstyleId,
-                ),
-                AssetGridView(
-                  onTap: provider.setEyesId,
-                  assets: UserAvatarAssets.eyes,
-                  id: provider.eyesId,
-                ),
-                AssetGridView(
-                  onTap: provider.setBrowsId,
-                  assets: UserAvatarAssets.brows,
-                  id: provider.browsId,
-                ),
-                AssetGridView(
-                  onTap: provider.setMouthId,
-                  assets: UserAvatarAssets.mouths,
-                  id: provider.mouthId,
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
+        ),
+        Expanded(
+          child: TabBarView(
+            controller: tabController,
+            children: [
+              ColorGridView(
+                onTap: provider.setBackgroundId,
+                colors: UserAvatarAssets.backgroundColors,
+                id: provider.backgroundColorId,
+              ),
+              AssetGridView(
+                onTap: provider.setBodyId,
+                assets: UserAvatarAssets.bodies,
+                id: provider.bodyId,
+              ),
+              AssetGridView(
+                onTap: provider.setHairstyleId,
+                assets: UserAvatarAssets.hairstyles,
+                id: provider.hairstyleId,
+              ),
+              AssetGridView(
+                onTap: provider.setEyesId,
+                assets: UserAvatarAssets.eyes,
+                id: provider.eyesId,
+              ),
+              AssetGridView(
+                onTap: provider.setBrowsId,
+                assets: UserAvatarAssets.brows,
+                id: provider.browsId,
+              ),
+              AssetGridView(
+                onTap: provider.setMouthId,
+                assets: UserAvatarAssets.mouths,
+                id: provider.mouthId,
+              ),
+            ],
+          ),
+        )
+      ],
     );
   }
 }

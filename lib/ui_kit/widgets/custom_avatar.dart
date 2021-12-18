@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:itmo_meta/ui_kit/avatar/user_avatar_assets.dart';
+
+import '../avatar/user_avatar_assets.dart';
 
 class CustomAvatar extends StatelessWidget {
   const CustomAvatar({
@@ -34,6 +35,7 @@ class CustomAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.only(top: 8),
       height: avatarHeight,
       width: avatarHeight,
       decoration: BoxDecoration(

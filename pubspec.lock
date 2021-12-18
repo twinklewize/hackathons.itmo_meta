@@ -130,7 +130,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
-<<<<<<< HEAD
   path_drawing:
     dependency: transitive
     description:
@@ -152,8 +151,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.4.0"
-=======
->>>>>>> custom_avatar
   provider:
     dependency: "direct main"
     description:
@@ -230,10 +227,5 @@ packages:
     source: hosted
     version: "5.3.1"
 sdks:
-<<<<<<< HEAD
   dart: ">=2.16.0-56.0.dev <3.0.0"
   flutter: ">=1.24.0-7.0"
-=======
-  dart: ">=2.12.0 <3.0.0"
-  flutter: ">=1.16.0"
->>>>>>> custom_avatar

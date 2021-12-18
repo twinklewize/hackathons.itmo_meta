@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'custom_avatar/custom_avatar_view_model.dart';
 import 'package:provider/provider.dart';
-import 'custom_avatar/custom_avatar_view.dart';
+import 'features/custom_avatar/custom_avatar_view.dart';
+import 'features/custom_avatar/custom_avatar_view_model.dart';
 import 'providers/market_provider.dart';
 import 'providers/my_account_provider.dart';
+import 'ui_kit/constants/app_colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,7 +31,8 @@ class MyApp extends StatelessWidget {
         title: 'ITMO Meta',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          // primarySwatch: Colors.blue,
+          primaryColor: AppColors.primary,
         ),
         home: CustomAvatarView(),
       ),
