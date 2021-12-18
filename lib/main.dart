@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'providers/feed_provider.dart';
 import 'package:provider/provider.dart';
 import 'features/custom_avatar/custom_avatar_view.dart';
 import 'features/custom_avatar/custom_avatar_view_model.dart';
@@ -25,6 +26,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: CustomAvatarViewModel(),
+        ),
+        ChangeNotifierProvider.value(
+          value: FeedProvider(),
         ),
       ],
       child: MaterialApp(
