@@ -36,6 +36,18 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/avatar/blush/
+    - assets/avatar/bodies/
+    - assets/avatar/brows/
+    - assets/avatar/eyes/
+    - assets/avatar/glasses/
+    - assets/avatar/hairstyles/
+    - assets/avatar/mouth/
+
+    - assets/clothes/boots/
+    - assets/clothes/pants/
+    - assets/clothes/t_shirts/
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

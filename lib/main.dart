@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
-import 'features/home_page/home_page.dart';
+import 'custom_avatar/custom_avatar_view_model.dart';
+import 'package:provider/provider.dart';
+import 'custom_avatar/custom_avatar_view.dart';
 import 'providers/market_provider.dart';
 import 'providers/my_account_provider.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,14 +22,17 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: MyAccountProvider(),
         ),
+        ChangeNotifierProvider.value(
+          value: CustomAvatarViewModel(),
+        ),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'ITMO Meta',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: HomePage(),
+        home: CustomAvatarView(),
       ),
     );
   }
