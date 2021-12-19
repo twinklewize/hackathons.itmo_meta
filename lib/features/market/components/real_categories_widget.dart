@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ict_hack/features/market/components/market_category_widget.dart';
+import 'package:ict_hack/features/market/components/market_widget.dart';
 
-class RealCategoriesWidget extends StatelessWidget {
-  const RealCategoriesWidget({Key? key}) : super(key: key);
+class MarketplaceWidget extends StatelessWidget {
+  const MarketplaceWidget({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ict_hack/features/market/components/ingame_categories_widget.dart';
+import 'package:ict_hack/features/market/components/shop_widget.dart';
 import 'package:ict_hack/features/market/components/real_categories_widget.dart';
 
 import '../../ui_kit/constants/app_colors.dart';
@@ -35,10 +35,10 @@ class MarketPage extends StatelessWidget {
         body: TabBarView(
           children: [
             SingleChildScrollView(
-              child: IngameCategoriesWidget(),
+              child: ShopWidget(),
             ),
             SingleChildScrollView(
-              child: RealCategoriesWidget(),
+              child: MarketplaceWidget(),
             ),
           ],
         ),

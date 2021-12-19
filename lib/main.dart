@@ -9,6 +9,7 @@ import 'features/custom_avatar/custom_avatar_view.dart';
 import 'features/custom_avatar/custom_avatar_view_model.dart';
 import 'providers/market_provider.dart';
 import 'providers/my_feed_provider.dart';
+import 'providers/shop_provider.dart';
 import 'providers/user_provider.dart';
 import 'ui_kit/constants/app_colors.dart';
 
@@ -43,6 +44,12 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: AuthProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: ShopProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: MarketProvider(),
         ),
       ],
       child: MaterialApp(

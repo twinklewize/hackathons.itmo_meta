@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:ict_hack/entities/enventory_item.dart';
 import '../entities/user_avatar_entity.dart';
 import '../entities/user_entity.dart';
 import 'package:ict_hack/entities/user_avatar_entity.dart';
@@ -40,7 +41,7 @@ class UserProvider with ChangeNotifier {
   Future<UserEntity?> findUser(int isu) async {
     UserEntity? result;
     final url =
-        Uri.parse('http://192.168.50.158:2021/ItmoMeta/api/auth/findUser');
+        Uri.parse('http://172.28.96.206:2021/ItmoMeta/api/auth/findUser');
     final response = await http.post(
       url,
       headers: {HttpHeaders.contentTypeHeader: "application/json"},
@@ -57,6 +58,41 @@ class UserProvider with ChangeNotifier {
     print(response.body);
     notifyListeners();
     return result;
+  }
+
+  Future<void> getInventory() async {
+    final url = Uri.parse(
+        'http://172.28.96.206:2021/ItmoMeta/api/inventory/getInventory');
+    final response = await http.post(
+      url,
+      headers: {HttpHeaders.contentTypeHeader: "application/json"},
+      body: jsonEncode(
+        {
+          'isu': userEntity.id,
+        },
+      ),
+    );
+    print(response.statusCode);
+    if (response.statusCode != 200) {
+      print(response.statusCode);
+    }
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      userEntity.inventoryItems.clear();
+      for (var item in jsonDecode(response.body)) {
+        EnventoryItem newItem = EnventoryItem(
+          id: item['uniqId'],
+          name: item['name'],
+          imageAsset: item['imageUrl'],
+          type: item['type'],
+          rarity: item['rarity'],
+          amount: 0,
+        );
+        userEntity.inventoryItems.add(newItem);
+      }
+    }
+    notifyListeners();
   }
 
   // возвращает статус код

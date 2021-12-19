@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:ict_hack/entities/enventory_item.dart';
 import 'package:ict_hack/features/market/components/filters_page.dart';
 import 'package:ict_hack/providers/market_provider.dart';
+import 'package:ict_hack/providers/user_provider.dart';
 import 'package:ict_hack/ui_kit/half_long_button.dart';
 import 'package:ict_hack/ui_kit/universal_moodal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
+import '../../../providers/shop_provider.dart';
 import '../../../ui_kit/constants/app_colors.dart';
 
 class SingleCategoryWidget extends StatelessWidget {
@@ -61,7 +63,14 @@ class SingleCategoryWidget extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {
+                    onTap: () async {
+                      await Provider.of<ShopProvider>(context, listen: false)
+                          .buy(
+                        item.id,
+                        Provider.of<UserProvider>(context, listen: false)
+                            .userEntity
+                            .id,
+                      );
                       Navigator.of(context).pop();
                     },
                     child: HalfLongButton(
@@ -89,16 +98,20 @@ class SingleCategoryWidget extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).push(
               MaterialPageRoute<void>(
-                builder: (BuildContext context) => FiltersPage(),
+                builder: (BuildContext context) => const FiltersPage(),
               ),
             );
           },
-          icon: Icon(Icons.filter_alt_outlined),
+          icon: const Icon(Icons.filter_alt_outlined),
         ),
       ],
     );
-    var items =
-        Provider.of<MarketProvider>(context).getItemsForCategory(categoryName);
+    List<EnventoryItem> items = [];
+    for (var item in Provider.of<ShopProvider>(context).itemsInShop) {
+      if (item.type == categoryName) {
+        items.add(item);
+      }
+    }
     return Scaffold(
       appBar: appBar,
       body: Padding(
@@ -137,7 +150,7 @@ class SingleCategoryWidget extends StatelessWidget {
                                 width: 60,
                                 child: Image.asset(
                                   items[index].imageAsset,
-                                  fit: BoxFit.cover,
+                                  fit: BoxFit.contain,
                                 ),
                               ),
                             ),

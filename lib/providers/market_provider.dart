@@ -5,17 +5,17 @@ class MarketProvider with ChangeNotifier {
   // список вещей на авито
   List<EnventoryItem> itemsInMarket = [
     EnventoryItem(
-      id: 'id0',
+      id: 0,
       name: 'Худи',
-      uniqId: 'uniqId0',
+      uniqId: 0,
       imageAsset: 'assets/images/hoodie.png',
       type: 'Одежда',
       rarity: 'Basic',
       amount: 25,
     ),
     EnventoryItem(
-      id: 'id1',
-      uniqId: 'uniqId1',
+      id: 1,
+      uniqId: 1,
       name: 'Худи 2',
       imageAsset: 'assets/images/hoodie_2.png',
       type: 'Одежда',
@@ -23,17 +23,17 @@ class MarketProvider with ChangeNotifier {
       amount: 35,
     ),
     EnventoryItem(
-      id: 'id2',
+      id: 2,
       name: 'Бластер',
-      uniqId: 'uniqId2',
+      uniqId: 2,
       imageAsset: 'assets/images/blaster.png',
       type: 'В руку',
       rarity: 'Rare',
       amount: 100,
     ),
     EnventoryItem(
-      id: 'id3',
-      uniqId: 'uniqId3',
+      id: 3,
+      uniqId: 3,
       name: 'Шляпа ковбоя',
       imageAsset: 'assets/images/cowboy-hat.png',
       type: 'Шапки',

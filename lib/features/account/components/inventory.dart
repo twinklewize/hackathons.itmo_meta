@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:ict_hack/providers/user_provider.dart';
 import 'package:ict_hack/ui_kit/avatar/user_avatar_assets.dart';
+import 'package:provider/provider.dart';
 
+import '../../../providers/shop_provider.dart';
 import '../../../ui_kit/constants/app_colors.dart';
 
 class TabsWithInventoryElements extends StatefulWidget {
@@ -19,6 +22,11 @@ class _TabsWithInventoryElementsState extends State<TabsWithInventoryElements>
   void initState() {
     tabController = TabController(length: 5, vsync: this);
     super.initState();
+    Future.delayed(Duration.zero).then(
+      (value) async {
+        await Provider.of<UserProvider>(context, listen: false).getInventory();
+      },
+    );
   }
 
   @override
@@ -29,6 +37,29 @@ class _TabsWithInventoryElementsState extends State<TabsWithInventoryElements>
 
   @override
   Widget build(BuildContext context) {
+    List<String> tShirtsAssets = [];
+    List<String> pantsAssets = [];
+    List<String> glassesAssets = [];
+    List<String> bootsAssets = [];
+
+    for (var inventoryItem
+        in Provider.of<UserProvider>(context).userEntity.inventoryItems) {
+      switch (inventoryItem.type) {
+        case ("boots"):
+          bootsAssets.add(inventoryItem.imageAsset);
+          break;
+        case ("pants"):
+          pantsAssets.add(inventoryItem.imageAsset);
+          break;
+        case ("t_shirt"):
+          tShirtsAssets.add(inventoryItem.imageAsset);
+          break;
+        case ("glasses"):
+          glassesAssets.add(inventoryItem.imageAsset);
+          break;
+        default:
+      }
+    }
     return Column(
       children: [
         SizedBox(
@@ -70,22 +101,22 @@ class _TabsWithInventoryElementsState extends State<TabsWithInventoryElements>
             controller: tabController,
             children: [
               InventoryGridView(
-                assets: UserAvatarAssets.tShirts,
+                assets: tShirtsAssets,
                 onTap: (int value) {},
               ),
               InventoryGridView(
-                assets: UserAvatarAssets.pants,
+                assets: pantsAssets,
                 onTap: (int value) {},
               ),
               InventoryGridView(
-                assets: UserAvatarAssets.glasses,
+                assets: glassesAssets,
                 onTap: (int value) {},
               ),
               InventoryGridView(
-                assets: UserAvatarAssets.boots,
+                assets: bootsAssets,
                 onTap: (int value) {},
               ),
-              Text(''),
+              const Text(''),
             ],
           ),
         )

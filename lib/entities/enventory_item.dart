@@ -1,8 +1,8 @@
 class EnventoryItem {
   String imageAsset;
   String name;
-  String? uniqId;
-  String id;
+  int? uniqId;
+  int id;
   String type;
   String rarity;
   int amount;
