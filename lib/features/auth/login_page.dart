@@ -103,22 +103,13 @@ class LoginPage extends StatelessWidget {
                           passwordEditingController.text,
                           context,
                         );
-                        print(responseCode);
                         if (responseCode == 200) {
-                          Navigator.of(context).pushReplacement(
+                          Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute<void>(
                               builder: (BuildContext context) => HomePage(),
                             ),
+                            (r) => false,
                           );
-                        } else {
-                          Fluttertoast.showToast(
-                              msg: "Login Error",
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.CENTER,
-                              timeInSecForIosWeb: 1,
-                              backgroundColor: Colors.red,
-                              textColor: Colors.white,
-                              fontSize: 16.0);
                         }
                       },
                       child: HalfLongButton(

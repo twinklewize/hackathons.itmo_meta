@@ -106,21 +106,13 @@ class RegisterPage extends StatelessWidget {
                         );
                         print(responseCode);
                         if (responseCode == 200) {
-                          Navigator.of(context).pushReplacement(
+                          Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute<void>(
                               builder: (BuildContext context) =>
                                   CustomAvatarView(newAvatar: true),
                             ),
+                            (r) => false,
                           );
-                        } else {
-                          Fluttertoast.showToast(
-                              msg: "Register Error",
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.CENTER,
-                              timeInSecForIosWeb: 1,
-                              backgroundColor: Colors.red,
-                              textColor: Colors.white,
-                              fontSize: 16.0);
                         }
                       },
                       child: HalfLongButton(
