@@ -33,7 +33,7 @@ class MyAccountPage extends StatelessWidget {
                     text: '1000 ', // non-emoji characters
                   ),
                   TextSpan(
-                    text: '🪙', // emoji characters
+                    text: '💵', // emoji characters
                     style: TextStyle(
                       fontFamily: 'EmojiOne',
                     ),
