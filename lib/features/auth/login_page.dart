@@ -102,10 +102,11 @@ class LoginPage extends StatelessWidget {
                         //   passwordEditingController.text,
                         // );
                         // print(responseCode);
-                        Navigator.of(context).pushReplacement(
+                        Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute<void>(
                             builder: (BuildContext context) => HomePage(),
                           ),
+                          (r) => false,
                         );
                       },
                       child: HalfLongButton(

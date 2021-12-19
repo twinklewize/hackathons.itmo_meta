@@ -102,11 +102,12 @@ class RegisterPage extends StatelessWidget {
                         //   passwordEditingController.text,
                         // );
                         // print(responseCode);
-                        Navigator.of(context).pushReplacement(
+                        Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute<void>(
                             builder: (BuildContext context) =>
                                 CustomAvatarView(newAvatar: true),
                           ),
+                          (r) => false,
                         );
                       },
                       child: HalfLongButton(
