@@ -7,6 +7,9 @@ class UserEntity {
   String nickname;
   List<EnventoryItem> inventoryItems;
   List<int> achievments;
+  int coins;
+  int diamonds;
+  int levelPoints;
 
   UserEntity({
     required this.userAvatar,
@@ -14,5 +17,8 @@ class UserEntity {
     required this.id,
     required this.inventoryItems,
     required this.achievments,
+    required this.coins,
+    required this.diamonds,
+    required this.levelPoints,
   });
 }

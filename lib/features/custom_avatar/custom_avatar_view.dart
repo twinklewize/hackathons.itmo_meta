@@ -46,21 +46,26 @@ class CustomAvatarView extends StatelessWidget {
               Icons.check_rounded,
               color: AppColors.textColor,
             ),
-            onPressed: () {
+            onPressed: () async {
               if (nicknameController.text == '') return;
               provider.setNickname(nicknameController.text);
 
               userProvider.setUserAvatar(provider.userAvatar);
               userProvider.setUserNickname(provider.nickname);
 
-              // Переход на новую страницу
-              newAvatar
-                  ? Navigator.of(context).pushReplacement(
-                      MaterialPageRoute<void>(
-                        builder: (BuildContext context) => const HomePage(),
-                      ),
-                    )
-                  : Navigator.of(context).pop();
+              int responseCode =
+                  await Provider.of<UserProvider>(context, listen: false)
+                      .update();
+              if (responseCode == 200) {
+                // Переход на новую страницу
+                newAvatar
+                    ? Navigator.of(context).pushReplacement(
+                        MaterialPageRoute<void>(
+                          builder: (BuildContext context) => const HomePage(),
+                        ),
+                      )
+                    : Navigator.of(context).pop();
+              }
             },
           ),
         ],

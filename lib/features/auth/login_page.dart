@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ict_hack/features/home_page/home_page.dart';
 import 'package:ict_hack/ui_kit/half_long_button.dart';
 import 'package:provider/provider.dart';
@@ -94,19 +95,31 @@ class LoginPage extends StatelessWidget {
                     alignment: Alignment.center,
                     child: GestureDetector(
                       onTap: () async {
-                        // int responseCode = await Provider.of<AuthProvider>(
-                        //         context,
-                        //         listen: false)
-                        //     .login(
-                        //   int.parse(emailEditingController.text),
-                        //   passwordEditingController.text,
-                        // );
-                        // print(responseCode);
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute<void>(
-                            builder: (BuildContext context) => HomePage(),
-                          ),
+                        int responseCode = await Provider.of<AuthProvider>(
+                                context,
+                                listen: false)
+                            .login(
+                          int.parse(emailEditingController.text),
+                          passwordEditingController.text,
+                          context,
                         );
+                        print(responseCode);
+                        if (responseCode == 200) {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) => HomePage(),
+                            ),
+                          );
+                        } else {
+                          Fluttertoast.showToast(
+                              msg: "Login Error",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0);
+                        }
                       },
                       child: HalfLongButton(
                         title: "Вход",

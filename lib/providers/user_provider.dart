@@ -18,7 +18,10 @@ class UserProvider with ChangeNotifier {
       mouthId: 0,
     ),
     nickname: '',
-    id: 28564,
+    id: 0,
+    coins: 1000,
+    diamonds: 100,
+    levelPoints: 10,
     inventoryItems: [],
     achievments: [0, 1, 3],
   );
@@ -58,18 +61,53 @@ class UserProvider with ChangeNotifier {
 
   // возвращает статус код
   // обновляет инфу о юзере на сервере
-  Future<int> update(UserEntity user) async {
-    final url =
-        Uri.parse('http://192.168.50.158:2021/ItmoMeta/api/auth/update');
+  Future<int> update() async {
+    final url = Uri.parse('http://172.28.96.206:2021/ItmoMeta/api/auth/update');
     final response = await http.post(
       url,
       headers: {HttpHeaders.contentTypeHeader: "application/json"},
       body: json.encode(
         {
-          'user': user,
+          'isu': userEntity.id,
+          'password': 'https://www.youtube.com/watch?v=Kprv72YvACM',
+          'username': userEntity.nickname,
+          'coins': userEntity.coins,
+          'diamonds': userEntity.diamonds,
+          'levelPoints': userEntity.levelPoints,
+          'skinColor': userEntity.userAvatar.bodyId,
+          'backgroundColorId': userEntity.userAvatar.backgroundColorId,
+          'browsId': userEntity.userAvatar.browsId,
+          'eyesId': userEntity.userAvatar.eyesId,
+          'hairstyleId': userEntity.userAvatar.hairstyleId,
+          'mouthId': userEntity.userAvatar.mouthId,
+          'pantsId': userEntity.userAvatar.pantsId,
+          'tShortId': userEntity.userAvatar.tShirtId,
+          'bootsId': userEntity.userAvatar.bootsId,
+          'glassesId': userEntity.userAvatar.glassesId,
         },
       ),
     );
+    print(json.encode(
+      {
+        'isu': userEntity.id,
+        'password': 'https://www.youtube.com/watch?v=Kprv72YvACM',
+        'username': userEntity.nickname,
+        'coins': userEntity.coins,
+        'diamonds': userEntity.diamonds,
+        'levelPoints': userEntity.levelPoints,
+        'skinColor': userEntity.userAvatar.bodyId,
+        'backgroundColorId': userEntity.userAvatar.backgroundColorId,
+        'browsId': userEntity.userAvatar.browsId,
+        'eyesId': userEntity.userAvatar.eyesId,
+        'hairstyleId': userEntity.userAvatar.hairstyleId,
+        'mouthId': userEntity.userAvatar.mouthId,
+        'pantsId': userEntity.userAvatar.pantsId,
+        'tShortId': userEntity.userAvatar.tShirtId,
+        'bootsId': userEntity.userAvatar.bootsId,
+        'glassesId': userEntity.userAvatar.glassesId,
+      },
+    ));
+
     print(response.statusCode);
     if (response.statusCode != 200) {
       return response.statusCode;
