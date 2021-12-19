@@ -27,4 +27,9 @@ class AppColors {
 
   // цвет даты сообщения юзера
   static Color? myMessageDateTimeColor = Colors.grey[700];
+
+  static const green = Color(0xFF9CC569);
+  static const yellow = Color(0xFFF9DD7C);
+  static const blue = Color(0xFFB3ADF7);
+  static const red = Color(0xFFE7858E);
 }

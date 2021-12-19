@@ -6,11 +6,13 @@ class UniversaModalBottomSheet extends StatelessWidget {
     required this.content,
     this.title,
     this.description,
+    this.color = Colors.white,
   }) : super(key: key);
 
   String? title;
   Widget? description;
   Widget content;
+  Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class UniversaModalBottomSheet extends StatelessWidget {
         padding: const EdgeInsets.only(left: 15, right: 15, bottom: 49),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: color,
             borderRadius: BorderRadius.circular(10),
           ),
           child: Column(

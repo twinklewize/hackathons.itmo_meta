@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:ict_hack/ui_kit/avatar/user_avatar_assets.dart';
 
 import '../../../ui_kit/constants/app_colors.dart';
+import '../../../ui_kit/half_long_button.dart';
+import '../../../ui_kit/universal_moodal_bottom_sheet.dart';
+import '../../../ui_kit/widgets/custom_text_field.dart';
 
 class TabsWithInventoryElements extends StatefulWidget {
   const TabsWithInventoryElements({Key? key}) : super(key: key);
@@ -119,9 +122,12 @@ class InventoryGridView extends StatelessWidget {
           return ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Material(
-              color: AppColors.backgroundLight,
+              color: AppColors.yellow,
               child: InkWell(
-                onTap: () => onTap(index),
+                // onTap: () => onTap(index),
+                onTap: () {
+                  onItemButton(context);
+                },
                 child: Container(
                   width: 120,
                   height: 120,
@@ -131,19 +137,29 @@ class InventoryGridView extends StatelessWidget {
                   child: Column(
                     children: [
                       SizedBox(
-                        width: 72,
-                        height: 72,
+                        width: 60,
+                        height: 60,
                         child: Image.asset(
                           assets[index],
                           fit: BoxFit.contain,
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 12),
                       const Text(
                         'Футболка',
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           color: AppColors.textColor,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        'Редкий',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: AppColors.textColor.withOpacity(0.5),
                         ),
                       ),
                     ],
@@ -154,6 +170,64 @@ class InventoryGridView extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+
+  void onItemButton(BuildContext context) {
+    showModalBottomSheet<void>(
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (BuildContext context) {
+        return UniversaModalBottomSheet(
+          color: AppColors.backgroundLight,
+          title: "Продать на маркете",
+          content: Column(
+            children: [
+              const SizedBox(height: 16),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                child: Text("Вы уверены, что хотите продать Футболку?"),
+              ),
+              const SizedBox(height: 12),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: CustomTextField(
+                  controller: TextEditingController(),
+                  textInputType: TextInputType.number,
+                  hintText: 'Цена:',
+                ),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: HalfLongButton(
+                      fillColor: AppColors.red,
+                      titleTextColor: Colors.white,
+                      title: 'Нет',
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: HalfLongButton(
+                      fillColor: AppColors.green,
+                      titleTextColor: Colors.white,
+                      title: 'Да',
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 }

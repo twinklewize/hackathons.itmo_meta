@@ -6,7 +6,12 @@ class CustomTextField extends StatelessWidget {
   const CustomTextField({
     Key? key,
     required this.controller,
+    this.hintText = 'Никнейм',
+    this.textInputType,
   }) : super(key: key);
+
+  final String hintText;
+  final TextInputType? textInputType;
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +26,11 @@ class CustomTextField extends StatelessWidget {
           const SizedBox(width: 16),
           Expanded(
             child: TextField(
+              keyboardType: textInputType,
               controller: controller,
               style: const TextStyle(color: AppColors.textColor),
               decoration: InputDecoration(
-                hintText: 'Никнейм',
+                hintText: hintText,
                 hintStyle: TextStyle(
                   fontSize: 16,
                   color: AppColors.textColor.withOpacity(0.5),
