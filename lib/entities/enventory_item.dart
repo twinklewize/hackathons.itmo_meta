@@ -1,7 +1,7 @@
 class EnventoryItem {
   String imageAsset;
   String name;
-  String uniqId;
+  String? uniqId;
   String id;
   String type;
   String rarity;
@@ -10,7 +10,7 @@ class EnventoryItem {
   EnventoryItem({
     required this.id,
     required this.name,
-    required this.uniqId,
+    this.uniqId,
     required this.imageAsset,
     required this.type,
     required this.rarity,

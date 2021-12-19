@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ict_hack/entities/enventory_item.dart';
 
 class MarketProvider with ChangeNotifier {
-  // список вещей в сторе
+  // список вещей на авито
   List<EnventoryItem> itemsInMarket = [
     EnventoryItem(
       id: 'id0',

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ict_hack/features/home_page/home_page.dart';
 import 'package:ict_hack/ui_kit/half_long_button.dart';
+import 'package:provider/provider.dart';
+import '../../providers/auth_provider.dart';
 import '../../ui_kit/constants/app_colors.dart';
 import '../../ui_kit/widgets/textfield.dart';
 
@@ -53,9 +56,8 @@ class LoginPage extends StatelessWidget {
                           labelText: 'Номер ИСУ',
                           maxLines: 1,
                           minLines: 1,
-                          keyboardType: TextInputType.emailAddress,
+                          keyboardType: TextInputType.number,
                           inputTextColor: Colors.black,
-                          textInputAction: TextInputAction.continueAction,
                         ),
 
                         const SizedBox(height: 32),
@@ -80,7 +82,6 @@ class LoginPage extends StatelessWidget {
                           minLines: 1,
                           keyboardType: TextInputType.emailAddress,
                           inputTextColor: Colors.black,
-                          textInputAction: TextInputAction.continueAction,
                         ),
 
                         const SizedBox(height: 48),
@@ -92,8 +93,20 @@ class LoginPage extends StatelessWidget {
                   Align(
                     alignment: Alignment.center,
                     child: GestureDetector(
-                      onTap: () {
-                        //
+                      onTap: () async {
+                        // int responseCode = await Provider.of<AuthProvider>(
+                        //         context,
+                        //         listen: false)
+                        //     .login(
+                        //   int.parse(emailEditingController.text),
+                        //   passwordEditingController.text,
+                        // );
+                        // print(responseCode);
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute<void>(
+                            builder: (BuildContext context) => HomePage(),
+                          ),
+                        );
                       },
                       child: HalfLongButton(
                         title: "Вход",

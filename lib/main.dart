@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ict_hack/features/auth/start_page.dart';
+import 'providers/auth_provider.dart';
 import 'providers/chats_provider.dart';
 import 'providers/feed_provider.dart';
 import 'package:ict_hack/providers/user_provider.dart';
@@ -7,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'features/custom_avatar/custom_avatar_view.dart';
 import 'features/custom_avatar/custom_avatar_view_model.dart';
 import 'providers/market_provider.dart';
-import 'providers/my_account_provider.dart';
+import 'providers/my_feed_provider.dart';
 import 'providers/user_provider.dart';
 import 'ui_kit/constants/app_colors.dart';
 
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
           value: MarketProvider(),
         ),
         ChangeNotifierProvider.value(
-          value: MyAccountProvider(),
+          value: MyFeedProvider(),
         ),
         ChangeNotifierProvider.value(
           value: CustomAvatarViewModel(),
@@ -39,6 +40,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: ChatsProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: AuthProvider(),
         ),
       ],
       child: MaterialApp(

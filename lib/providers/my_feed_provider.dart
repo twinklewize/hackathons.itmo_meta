@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ict_hack/entities/post.dart';
 
-class MyAccountProvider with ChangeNotifier {
+class MyFeedProvider with ChangeNotifier {
   List<Post> posts = [
     Post(
       id: '1',
@@ -38,14 +38,6 @@ class MyAccountProvider with ChangeNotifier {
 
   void addNewPost(Post newPost) {
     posts.add(newPost);
-    notifyListeners();
-  }
-
-  void changeUsername(String newUsername) {
-    notifyListeners();
-  }
-
-  void exitFromAccount() {
     notifyListeners();
   }
 

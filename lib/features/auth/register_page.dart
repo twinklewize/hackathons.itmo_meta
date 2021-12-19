@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ict_hack/features/custom_avatar/custom_avatar_view.dart';
 import 'package:ict_hack/ui_kit/half_long_button.dart';
+import 'package:provider/provider.dart';
+import '../../providers/auth_provider.dart';
 import '../../ui_kit/constants/app_colors.dart';
 import '../../ui_kit/widgets/textfield.dart';
 
@@ -53,9 +56,8 @@ class RegisterPage extends StatelessWidget {
                           labelText: 'Номер ИСУ',
                           maxLines: 1,
                           minLines: 1,
-                          keyboardType: TextInputType.emailAddress,
+                          keyboardType: TextInputType.number,
                           inputTextColor: Colors.black,
-                          textInputAction: TextInputAction.continueAction,
                         ),
 
                         const SizedBox(height: 32),
@@ -80,7 +82,6 @@ class RegisterPage extends StatelessWidget {
                           minLines: 1,
                           keyboardType: TextInputType.emailAddress,
                           inputTextColor: Colors.black,
-                          textInputAction: TextInputAction.continueAction,
                         ),
 
                         const SizedBox(height: 48),
@@ -92,8 +93,21 @@ class RegisterPage extends StatelessWidget {
                   Align(
                     alignment: Alignment.center,
                     child: GestureDetector(
-                      onTap: () {
-                        //
+                      onTap: () async {
+                        // int responseCode = await Provider.of<AuthProvider>(
+                        //         context,
+                        //         listen: false)
+                        //     .register(
+                        //   int.parse(emailEditingController.text),
+                        //   passwordEditingController.text,
+                        // );
+                        // print(responseCode);
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute<void>(
+                            builder: (BuildContext context) =>
+                                CustomAvatarView(newAvatar: true),
+                          ),
+                        );
                       },
                       child: HalfLongButton(
                         title: "Регистрация",

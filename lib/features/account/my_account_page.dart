@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ict_hack/features/feed/components/post_details_page.dart';
-import 'package:ict_hack/providers/my_account_provider.dart';
+import 'package:ict_hack/providers/my_feed_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../ui_kit/constants/app_colors.dart';
@@ -198,7 +198,7 @@ class MyAccountPage extends StatelessWidget {
 
             const Divider(thickness: 1, height: 1),
             const SizedBox(height: 24),
-            for (var post in Provider.of<MyAccountProvider>(context).posts)
+            for (var post in Provider.of<MyFeedProvider>(context).posts)
               GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(
