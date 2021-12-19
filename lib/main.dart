@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ict_hack/features/auth/start_page.dart';
 import 'providers/chats_provider.dart';
 import 'providers/feed_provider.dart';
 import 'package:ict_hack/providers/user_provider.dart';
@@ -48,7 +49,7 @@ class MyApp extends StatelessWidget {
           // primarySwatch: Colors.blue,
           primaryColor: AppColors.primary,
         ),
-        home: CustomAvatarView(newAvatar: true),
+        home: const StartPage(),
       ),
     );
   }
