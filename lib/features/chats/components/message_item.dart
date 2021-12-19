@@ -1,8 +1,8 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:ict_hack/providers/user_provider.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../../../entities/message.dart';
+import '../../../providers/user_provider.dart';
 import '../../../ui_kit/constants/app_colors.dart';
 
 // вовзращает сообщение (от меня или от собеседника)
