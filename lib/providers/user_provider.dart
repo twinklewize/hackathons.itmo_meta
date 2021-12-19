@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../entities/user_avatar_entity.dart';
 import '../entities/user_entity.dart';
+import 'package:ict_hack/entities/user_avatar_entity.dart';
+import 'package:ict_hack/entities/user_entity.dart';
 
 class UserProvider with ChangeNotifier {
   UserEntity userEntity = UserEntity(
@@ -26,7 +28,7 @@ class UserProvider with ChangeNotifier {
       //   amount: amount,
       // )
     ],
-    achievments: [],
+    achievments: [0, 1, 3],
   );
 
   void setUserAvatar(UserAvatarEntity userAvatar) {

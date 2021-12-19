@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ict_hack/features/home_page/home_page.dart';
 import 'package:provider/provider.dart';
 
+import '../../providers/user_provider.dart';
 import '../../ui_kit/avatar/user_avatar_assets.dart';
 import '../../ui_kit/constants/app_colors.dart';
 import '../../ui_kit/widgets/custom_avatar.dart';
@@ -9,12 +10,23 @@ import '../../ui_kit/widgets/custom_text_field.dart';
 import 'custom_avatar_view_model.dart';
 
 class CustomAvatarView extends StatelessWidget {
-  CustomAvatarView({Key? key}) : super(key: key);
-  final nicknameController = TextEditingController();
+  final bool newAvatar;
+  final String? nick;
+  late final nicknameController;
+
+  CustomAvatarView({
+    Key? key,
+    required this.newAvatar,
+    this.nick,
+  }) : super(key: key) {
+    nicknameController = TextEditingController(text: nick);
+  }
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<CustomAvatarViewModel>(context);
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    provider.setUserAvatar(userProvider.userEntity.userAvatar);
     return Scaffold(
       backgroundColor: AppColors.backgroundLight,
       resizeToAvoidBottomInset: false,
@@ -25,15 +37,9 @@ class CustomAvatarView extends StatelessWidget {
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: AppColors.textColor,
-          ),
-          onPressed: () {
-            // Navigator.of(context).pop();
-          },
-        ),
+        foregroundColor: AppColors.textColor,
+
+        // Подтвердить
         actions: [
           IconButton(
             icon: const Icon(
@@ -41,13 +47,20 @@ class CustomAvatarView extends StatelessWidget {
               color: AppColors.textColor,
             ),
             onPressed: () {
+              if (nicknameController.text == '') return;
               provider.setNickname(nicknameController.text);
-              provider.createAvatar();
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute<void>(
-                  builder: (BuildContext context) => const HomePage(),
-                ),
-              );
+
+              userProvider.setUserAvatar(provider.userAvatar);
+              userProvider.setUserNickname(provider.nickname);
+
+              // Переход на новую страницу
+              newAvatar
+                  ? Navigator.of(context).pushReplacement(
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) => const HomePage(),
+                      ),
+                    )
+                  : Navigator.of(context).pop();
             },
           ),
         ],
@@ -58,19 +71,16 @@ class CustomAvatarView extends StatelessWidget {
 
           // Аватар
           CustomAvatar(
-            backgroundColorId: provider.backgroundColorId,
             avatarHeight: 200,
-            hairstyleId: provider.hairstyleId,
-            bodyId: provider.bodyId,
-            browsId: provider.browsId,
-            eyesId: provider.eyesId,
-            mouthId: provider.mouthId,
+            userAvatar: provider.userAvatar,
           ),
 
           // Текстовое поле
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 64, vertical: 32),
-            child: CustomTextField(controller: nicknameController),
+            child: CustomTextField(
+              controller: nicknameController,
+            ),
           ),
 
           // Изменение вида аватара
@@ -87,7 +97,9 @@ class CustomAvatarView extends StatelessWidget {
                 topRight: Radius.circular(14),
               ),
             ),
-            child: const TabsWithAvatarElements(),
+            child: TabsWithAvatarElements(
+              newAvatar: newAvatar,
+            ),
           ),
         ],
       ),
@@ -96,7 +108,9 @@ class CustomAvatarView extends StatelessWidget {
 }
 
 class TabsWithAvatarElements extends StatefulWidget {
-  const TabsWithAvatarElements({Key? key}) : super(key: key);
+  const TabsWithAvatarElements({Key? key, required this.newAvatar})
+      : super(key: key);
+  final bool newAvatar;
 
   @override
   _TabsWithAvatarElementsState createState() => _TabsWithAvatarElementsState();
@@ -108,7 +122,9 @@ class _TabsWithAvatarElementsState extends State<TabsWithAvatarElements>
 
   @override
   void initState() {
-    tabController = TabController(length: 6, vsync: this);
+    tabController = widget.newAvatar
+        ? TabController(length: 6, vsync: this)
+        : TabController(length: 10, vsync: this);
     super.initState();
   }
 
@@ -135,26 +151,7 @@ class _TabsWithAvatarElementsState extends State<TabsWithAvatarElements>
                 labelColor: AppColors.primary,
                 indicatorWeight: 4,
                 controller: tabController,
-                tabs: const [
-                  Tab(
-                    text: 'Цвет фона',
-                  ),
-                  Tab(
-                    text: 'Тело',
-                  ),
-                  Tab(
-                    text: 'Волосы',
-                  ),
-                  Tab(
-                    text: 'Глаза',
-                  ),
-                  Tab(
-                    text: 'Брови',
-                  ),
-                  Tab(
-                    text: 'Рот',
-                  ),
-                ],
+                tabs: tabs,
               ),
               Divider(height: 1, color: AppColors.textColor.withOpacity(0.2)),
             ],
@@ -163,42 +160,163 @@ class _TabsWithAvatarElementsState extends State<TabsWithAvatarElements>
         Expanded(
           child: TabBarView(
             controller: tabController,
-            children: [
-              ColorGridView(
-                onTap: provider.setBackgroundId,
-                colors: UserAvatarAssets.backgroundColors,
-                id: provider.backgroundColorId,
-              ),
-              AssetGridView(
-                onTap: provider.setBodyId,
-                assets: UserAvatarAssets.bodies,
-                id: provider.bodyId,
-              ),
-              AssetGridView(
-                onTap: provider.setHairstyleId,
-                assets: UserAvatarAssets.hairstyles,
-                id: provider.hairstyleId,
-              ),
-              AssetGridView(
-                onTap: provider.setEyesId,
-                assets: UserAvatarAssets.eyes,
-                id: provider.eyesId,
-              ),
-              AssetGridView(
-                onTap: provider.setBrowsId,
-                assets: UserAvatarAssets.brows,
-                id: provider.browsId,
-              ),
-              AssetGridView(
-                onTap: provider.setMouthId,
-                assets: UserAvatarAssets.mouths,
-                id: provider.mouthId,
-              ),
-            ],
+            children: tabBarView(provider),
           ),
         )
       ],
     );
+  }
+
+  List<Widget> tabBarView(CustomAvatarViewModel provider) {
+    if (widget.newAvatar) {
+      return [
+        ColorGridView(
+          onTap: provider.setBackgroundId,
+          colors: UserAvatarAssets.backgroundColors,
+          id: provider.userAvatar.backgroundColorId,
+        ),
+        AssetGridView(
+          onTap: provider.setBodyId,
+          assets: UserAvatarAssets.bodies,
+          id: provider.userAvatar.bodyId,
+        ),
+        AssetGridView(
+          onTap: provider.setHairstyleId,
+          assets: UserAvatarAssets.hairstyles,
+          id: provider.userAvatar.hairstyleId,
+        ),
+        AssetGridView(
+          onTap: provider.setEyesId,
+          assets: UserAvatarAssets.eyes,
+          id: provider.userAvatar.eyesId,
+        ),
+        AssetGridView(
+          onTap: provider.setBrowsId,
+          assets: UserAvatarAssets.brows,
+          id: provider.userAvatar.browsId,
+        ),
+        AssetGridView(
+          onTap: provider.setMouthId,
+          assets: UserAvatarAssets.mouths,
+          id: provider.userAvatar.mouthId,
+        ),
+      ];
+    }
+    return [
+      AssetGridView(
+        onTap: provider.setTShirtId,
+        assets: UserAvatarAssets.tShirts,
+        id: provider.userAvatar.tShirtId,
+        haveEmptyElement: true,
+      ),
+      AssetGridView(
+        onTap: provider.setPantsId,
+        assets: UserAvatarAssets.pants,
+        id: provider.userAvatar.pantsId,
+        haveEmptyElement: true,
+      ),
+      AssetGridView(
+        onTap: provider.setBootsId,
+        assets: UserAvatarAssets.boots,
+        id: provider.userAvatar.bootsId,
+        haveEmptyElement: true,
+      ),
+      AssetGridView(
+        onTap: provider.setGlassesId,
+        assets: UserAvatarAssets.glasses,
+        id: provider.userAvatar.glassesId,
+        haveEmptyElement: true,
+      ),
+      ColorGridView(
+        onTap: provider.setBackgroundId,
+        colors: UserAvatarAssets.backgroundColors,
+        id: provider.userAvatar.backgroundColorId,
+      ),
+      AssetGridView(
+        onTap: provider.setBodyId,
+        assets: UserAvatarAssets.bodies,
+        id: provider.userAvatar.bodyId,
+      ),
+      AssetGridView(
+        onTap: provider.setHairstyleId,
+        assets: UserAvatarAssets.hairstyles,
+        id: provider.userAvatar.hairstyleId,
+        haveEmptyElement: true,
+      ),
+      AssetGridView(
+        onTap: provider.setEyesId,
+        assets: UserAvatarAssets.eyes,
+        id: provider.userAvatar.eyesId,
+      ),
+      AssetGridView(
+        onTap: provider.setBrowsId,
+        assets: UserAvatarAssets.brows,
+        id: provider.userAvatar.browsId,
+        haveEmptyElement: true,
+      ),
+      AssetGridView(
+        onTap: provider.setMouthId,
+        assets: UserAvatarAssets.mouths,
+        id: provider.userAvatar.mouthId,
+      ),
+    ];
+  }
+
+  List<Widget> get tabs {
+    if (widget.newAvatar) {
+      return [
+        const Tab(
+          text: 'Цвет фона',
+        ),
+        const Tab(
+          text: 'Тело',
+        ),
+        const Tab(
+          text: 'Волосы',
+        ),
+        const Tab(
+          text: 'Глаза',
+        ),
+        const Tab(
+          text: 'Брови',
+        ),
+        const Tab(
+          text: 'Рот',
+        ),
+      ];
+    }
+    return [
+      const Tab(
+        text: 'Футболка',
+      ),
+      const Tab(
+        text: 'Штаны',
+      ),
+      const Tab(
+        text: 'Обувь',
+      ),
+      const Tab(
+        text: 'Очки',
+      ),
+      const Tab(
+        text: 'Цвет фона',
+      ),
+      const Tab(
+        text: 'Тело',
+      ),
+      const Tab(
+        text: 'Волосы',
+      ),
+      const Tab(
+        text: 'Глаза',
+      ),
+      const Tab(
+        text: 'Брови',
+      ),
+      const Tab(
+        text: 'Рот',
+      ),
+    ];
   }
 }
 
@@ -270,14 +388,15 @@ class AssetGridView extends StatelessWidget {
     required this.onTap,
     required this.assets,
     required this.id,
+    this.haveEmptyElement = false,
   }) : super(key: key);
   final List<String> assets;
   final Function(int value) onTap;
   final int id;
+  final bool haveEmptyElement;
 
   @override
   Widget build(BuildContext context) {
-    // final provider = Provider.of<CustomAvatarViewModel>(context);
     return Padding(
       padding: const EdgeInsets.all(16),
       child: GridView.builder(
@@ -287,10 +406,14 @@ class AssetGridView extends StatelessWidget {
           childAspectRatio: 1,
           mainAxisSpacing: 16,
         ),
-        itemCount: assets.length,
+        itemCount: haveEmptyElement ? assets.length + 1 : assets.length,
         itemBuilder: (BuildContext ctx, index) {
           return GestureDetector(
-            onTap: () => onTap(index),
+            onTap: () {
+              (haveEmptyElement && index == assets.length)
+                  ? onTap(-1)
+                  : onTap(index);
+            },
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: Stack(
@@ -302,12 +425,14 @@ class AssetGridView extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: AppColors.primary,
                         borderRadius: BorderRadius.circular(20)),
-                    child: Image.asset(
-                      assets[index],
-                      fit: BoxFit.contain,
-                    ),
+                    child: (haveEmptyElement && index == assets.length)
+                        ? const SizedBox()
+                        : Image.asset(
+                            assets[index],
+                            fit: BoxFit.contain,
+                          ),
                   ),
-                  id == index
+                  id == index || (index == assets.length && id == -1)
                       ? Container(
                           width: 120,
                           height: 120,

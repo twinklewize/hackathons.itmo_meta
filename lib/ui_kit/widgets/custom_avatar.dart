@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ict_hack/entities/user_avatar_entity.dart';
 
 import '../avatar/user_avatar_assets.dart';
 
@@ -6,40 +7,20 @@ class CustomAvatar extends StatelessWidget {
   const CustomAvatar({
     Key? key,
     this.avatarHeight = 48,
-    required this.backgroundColorId,
-    this.bodyId = 0,
-    this.browsId = 0,
-    this.eyesId = 0,
-    this.hairstyleId = 0,
-    this.mouthId = 0,
-    this.tShirtId = 0,
-    this.pantsId = 0,
-    this.bootsId = 0,
-    this.glassesId = -1,
+    required this.userAvatar,
   }) : super(key: key);
 
+  final UserAvatarEntity userAvatar;
   final double avatarHeight;
-
-  final int backgroundColorId;
-  final int bodyId;
-  final int browsId;
-  final int eyesId;
-  final int hairstyleId;
-  final int mouthId;
-
-  final int pantsId;
-  final int tShirtId;
-  final int bootsId;
-  final int glassesId;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 8),
+      padding: EdgeInsets.only(top: 0.02 * avatarHeight),
       height: avatarHeight,
       width: avatarHeight,
       decoration: BoxDecoration(
-        color: UserAvatarAssets.backgroundColors[backgroundColorId],
+        color: UserAvatarAssets.backgroundColors[userAvatar.backgroundColorId],
         shape: BoxShape.circle,
       ),
       child: Stack(
@@ -50,7 +31,7 @@ class CustomAvatar extends StatelessWidget {
             right: 0.125 * avatarHeight,
             top: 0.1 * avatarHeight,
             height: 0.8 * avatarHeight,
-            child: Image.asset(UserAvatarAssets.bodies[bodyId]),
+            child: Image.asset(UserAvatarAssets.bodies[userAvatar.bodyId]),
           ),
 
           // Румяна
@@ -63,94 +44,120 @@ class CustomAvatar extends StatelessWidget {
           ),
 
           // Рот
-          Positioned(
-            left: 0.125 * avatarHeight,
-            right: 0.125 * avatarHeight,
-            height: 0.11 * avatarHeight,
-            top: 0.41 * avatarHeight,
-            child: Image.asset(UserAvatarAssets.mouths[mouthId]),
-          ),
+          userAvatar.mouthId != -1
+              ? Positioned(
+                  left: 0.125 * avatarHeight,
+                  right: 0.125 * avatarHeight,
+                  height: 0.11 * avatarHeight,
+                  top: 0.41 * avatarHeight,
+                  child:
+                      Image.asset(UserAvatarAssets.mouths[userAvatar.mouthId]),
+                )
+              : const SizedBox(),
 
           // Глаза
-          Positioned(
-            left: 0.125 * avatarHeight,
-            right: 0.125 * avatarHeight,
-            height: 0.1 * avatarHeight,
-            top: 0.28 * avatarHeight,
-            child: Image.asset(UserAvatarAssets.eyes[eyesId]),
-          ),
+          userAvatar.eyesId != -1
+              ? Positioned(
+                  left: 0.125 * avatarHeight,
+                  right: 0.125 * avatarHeight,
+                  height: 0.1 * avatarHeight,
+                  top: 0.28 * avatarHeight,
+                  child: Image.asset(UserAvatarAssets.eyes[userAvatar.eyesId]),
+                )
+              : const SizedBox(),
 
           // Брови
-          Positioned(
-            left: 0.125 * avatarHeight,
-            right: 0.125 * avatarHeight,
-            height: 0.038 * avatarHeight,
-            top: 0.24 * avatarHeight,
-            child: Image.asset(UserAvatarAssets.brows[browsId]),
-          ),
+          userAvatar.browsId != -1
+              ? Positioned(
+                  left: 0.125 * avatarHeight,
+                  right: 0.125 * avatarHeight,
+                  height: 0.038 * avatarHeight,
+                  top: 0.24 * avatarHeight,
+                  child:
+                      Image.asset(UserAvatarAssets.brows[userAvatar.browsId]),
+                )
+              : const SizedBox(),
 
           // Очки
-          glassesId != -1
+          userAvatar.glassesId != -1
               ? Positioned(
                   left: 0.125 * avatarHeight,
                   right: 0.125 * avatarHeight,
                   height: 0.14 * avatarHeight,
                   top: 0.26 * avatarHeight,
-                  child: Image.asset(UserAvatarAssets.glasses[glassesId]),
+                  child: Image.asset(
+                      UserAvatarAssets.glasses[userAvatar.glassesId]),
                 )
               : const SizedBox(),
 
           // Волосы
-          hairstyleId != -1
+          userAvatar.hairstyleId != -1
               ? Positioned(
                   left: 0.125 * avatarHeight,
                   right: 0.125 * avatarHeight,
                   height: 0.26 * avatarHeight,
                   top: 0.07 * avatarHeight,
-                  child: Image.asset(UserAvatarAssets.hairstyles[hairstyleId]),
+                  child: Image.asset(
+                      UserAvatarAssets.hairstyles[userAvatar.hairstyleId]),
                 )
               : const SizedBox(),
 
           // Объем волос
-          Positioned(
-            left: 0.125 * avatarHeight,
-            right: 0.125 * avatarHeight,
-            height: 0.15 * avatarHeight,
-            top: 0.03 * avatarHeight,
-            child: Image.asset(UserAvatarAssets.hairVolume),
-          ),
-
-          // Обувь
-          hairstyleId != -1
-              ? Positioned(
-                  left: 0.125 * avatarHeight,
-                  right: 0.125 * avatarHeight,
-                  height: 0.03 * avatarHeight,
-                  top: 0.84 * avatarHeight,
-                  child: Image.asset(UserAvatarAssets.boots[bootsId]),
-                )
-              : const SizedBox(),
-
-          // Штаны
-          hairstyleId != -1
+          UserAvatarAssets.hairstyles[userAvatar.hairstyleId] !=
+                  'assets/avatar/hairstyles/harry_potter_hair.png'
               ? Positioned(
                   left: 0.125 * avatarHeight,
                   right: 0.125 * avatarHeight,
                   height: 0.15 * avatarHeight,
+                  top: 0.03 * avatarHeight,
+                  child: Image.asset(UserAvatarAssets.hairVolume),
+                )
+              : const SizedBox(),
+
+          // Обувь
+          userAvatar.bootsId != -1
+              ? Positioned(
+                  left: 0.125 * avatarHeight,
+                  right: 0.125 * avatarHeight,
+                  height: 0.03 * avatarHeight,
+                  top: 0.85 * avatarHeight,
+                  child:
+                      Image.asset(UserAvatarAssets.boots[userAvatar.bootsId]),
+                )
+              : const SizedBox(),
+
+          // Штаны
+          userAvatar.pantsId != -1
+              ? Positioned(
+                  left: 0.128 * avatarHeight,
+                  right: 0.125 * avatarHeight,
+                  height: 0.15 * avatarHeight,
                   top: 0.7 * avatarHeight,
-                  child: Image.asset(UserAvatarAssets.pants[0]),
+                  child:
+                      Image.asset(UserAvatarAssets.pants[userAvatar.pantsId]),
                 )
               : const SizedBox(),
 
           // Футболка
-          hairstyleId != -1
-              ? Positioned(
-                  left: 0.134 * avatarHeight,
-                  right: 0.125 * avatarHeight,
-                  height: 0.228 * avatarHeight,
-                  top: 0.49 * avatarHeight,
-                  child: Image.asset(UserAvatarAssets.tShirts[tShirtId]),
-                )
+          userAvatar.tShirtId != -1
+              ? (UserAvatarAssets.tShirts[userAvatar.tShirtId] !=
+                      'assets/clothes/t_shirts/harry_potter_t_shirt.png'
+                  ? Positioned(
+                      left: 0.134 * avatarHeight,
+                      right: 0.125 * avatarHeight,
+                      height: 0.23 * avatarHeight,
+                      top: 0.49 * avatarHeight,
+                      child: Image.asset(
+                          UserAvatarAssets.tShirts[userAvatar.tShirtId]),
+                    )
+                  : Positioned(
+                      left: 0.134 * avatarHeight,
+                      right: 0.125 * avatarHeight,
+                      height: 0.35 * avatarHeight,
+                      top: 0.485 * avatarHeight,
+                      child: Image.asset(
+                          UserAvatarAssets.tShirts[userAvatar.tShirtId]),
+                    ))
               : const SizedBox(),
         ],
       ),
