@@ -8,7 +8,6 @@ class FeedProvider with ChangeNotifier {
       authorId: 'authorId1',
       dateTime: DateTime.now(),
       text: 'бипки, бипки и еще раз бипки!',
-      imageUrl: 'https://i.ytimg.com/vi/vb58mJvB4yY/maxresdefault.jpg',
       title: 'бипки',
       howManyComments: 4,
       userWhoLikedIds: ['id1', 'id2'],
@@ -36,5 +35,13 @@ class FeedProvider with ChangeNotifier {
       }
     }
     notifyListeners();
+  }
+
+  // получение писка постов конкретного юзера по id юзера
+  Future<List<Post>> getPostsById(int userId) async {
+    List<Post> result;
+    // TODO добавить http запрос
+    throw UnimplementedError();
+    // return result;
   }
 }

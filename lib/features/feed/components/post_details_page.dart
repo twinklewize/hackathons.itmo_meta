@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../entities/post.dart';
+import '../../../ui_kit/constants/app_colors.dart';
 import '../../../ui_kit/widgets/textfield.dart';
 import 'message_bubble_widget.dart';
 import 'post_item.dart';
@@ -17,6 +18,7 @@ class PostDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var appBar = AppBar(
       title: Text(post.title),
+      backgroundColor: AppColors.primary,
     );
 
     return Scaffold(
@@ -77,6 +79,7 @@ class PostDetailsPage extends StatelessWidget {
               child: SafeArea(
                 top: false,
                 child: Container(
+                  color: AppColors.primary,
                   width: MediaQuery.of(context).size.width,
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Row(
@@ -99,26 +102,20 @@ class PostDetailsPage extends StatelessWidget {
 
                       // write message textfield
                       Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.all(1),
-                          decoration: BoxDecoration(
-                              color: Colors.grey[500],
-                              borderRadius: BorderRadius.circular(10)),
-                          child: MyTextField(
-                            onChanged: (value) {},
-                            controller: writeCommentController,
-                            fillColor: const Color.fromRGBO(44, 45, 46, 1),
-                            labelText: 'Comment',
-                            keyboardType: TextInputType.multiline,
-                            textInputAction: TextInputAction.send,
-                            maxLines: 4,
-                            minLines: 1,
-                            inputTextColor: Colors.white,
-                          ),
+                        child: MyTextField(
+                          onChanged: (value) {},
+                          controller: writeCommentController,
+                          fillColor: AppColors.backgroundLight,
+                          labelText: 'Comment',
+                          keyboardType: TextInputType.multiline,
+                          textInputAction: TextInputAction.send,
+                          maxLines: 4,
+                          minLines: 1,
+                          inputTextColor: Colors.black,
                         ),
                       ),
 
-                      SizedBox(width: 15),
+                      const SizedBox(width: 15),
 
                       // send button
                       GestureDetector(

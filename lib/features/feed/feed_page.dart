@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ict_hack/features/feed/components/post_item.dart';
-import 'package:ict_hack/providers/feed_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../../providers/feed_provider.dart';
+import '../../ui_kit/constants/app_colors.dart';
 import 'components/post_details_page.dart';
+import 'components/post_item.dart';
 
 class FeedPage extends StatelessWidget {
   const FeedPage({Key? key}) : super(key: key);
@@ -12,6 +13,13 @@ class FeedPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var appBar = AppBar(
       title: const Text('Лента'),
+      backgroundColor: AppColors.primary,
+      actions: [
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.add_outlined),
+        ),
+      ],
     );
     var posts = Provider.of<FeedProvider>(context).posts;
     return Scaffold(
@@ -19,7 +27,7 @@ class FeedPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(height: 24),
+            const SizedBox(height: 12),
             for (var post in posts)
               GestureDetector(
                 onTap: () {

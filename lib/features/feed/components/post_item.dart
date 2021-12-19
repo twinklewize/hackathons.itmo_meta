@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../../../entities/post.dart';
 import '../../../providers/feed_provider.dart';
+import '../../../ui_kit/constants/app_colors.dart';
 
 class PostItem extends StatelessWidget {
   PostItem({
@@ -20,7 +21,7 @@ class PostItem extends StatelessWidget {
   ) {
     return Container(
       decoration: BoxDecoration(
-        color: uLikedOrNot ? Colors.red.withOpacity(0.1) : Colors.grey,
+        color: uLikedOrNot ? Colors.red.withOpacity(0.1) : AppColors.primary,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Material(
@@ -178,7 +179,7 @@ class PostItem extends StatelessWidget {
                   ? ClipRRect(
                       borderRadius: BorderRadius.circular(12),
                       child: Image.network(
-                        'https://pbs.twimg.com/media/FBl97R-XsAInRmr.jpg',
+                        post.imageUrl!,
                         width: MediaQuery.of(context).size.width - 48,
                         height: MediaQuery.of(context).size.width - 48,
                         fit: BoxFit.cover,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ict_hack/features/market/components/single_category_page.dart';
 
+import '../../../ui_kit/constants/app_colors.dart';
+
 class MarketCategoryWidget extends StatelessWidget {
   MarketCategoryWidget({
     Key? key,
@@ -28,7 +30,7 @@ class MarketCategoryWidget extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
         child: Container(
-          color: Colors.blue[100],
+          color: AppColors.primary,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ict_hack/features/market/components/ingame_categories_widget.dart';
 import 'package:ict_hack/features/market/components/real_categories_widget.dart';
 
+import '../../ui_kit/constants/app_colors.dart';
+
 class MarketPage extends StatelessWidget {
   const MarketPage({Key? key}) : super(key: key);
 
@@ -12,6 +14,7 @@ class MarketPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Маркет"),
+          backgroundColor: AppColors.primary,
           actions: [
             Row(
               children: [

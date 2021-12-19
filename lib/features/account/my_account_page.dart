@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ict_hack/features/account/components/my_post_item.dart';
+import 'package:ict_hack/features/feed/components/post_details_page.dart';
 import 'package:ict_hack/providers/my_account_provider.dart';
-import 'package:ict_hack/ui_kit/half_long_button.dart';
 import 'package:provider/provider.dart';
+
+import '../../ui_kit/constants/app_colors.dart';
+import '../feed/components/post_item.dart';
 
 class MyAccountPage extends StatelessWidget {
   const MyAccountPage({Key? key}) : super(key: key);
@@ -11,6 +13,7 @@ class MyAccountPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var appBar = AppBar(
       title: const Text('Мой профиль'),
+      backgroundColor: AppColors.primary,
       actions: [
         Row(
           children: [
@@ -105,10 +108,20 @@ class MyAccountPage extends StatelessWidget {
                 ),
               ),
             ),
-            Divider(thickness: 1),
-            SizedBox(height: 24),
+            const Divider(thickness: 1),
+            const SizedBox(height: 24),
             for (var post in Provider.of<MyAccountProvider>(context).posts)
-              MyPostItem(post: post),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) =>
+                          PostDetailsPage(post: post),
+                    ),
+                  );
+                },
+                child: PostItem(post: post),
+              ),
           ],
         ),
       ),

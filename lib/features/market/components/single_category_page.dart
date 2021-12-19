@@ -6,6 +6,8 @@ import 'package:ict_hack/ui_kit/half_long_button.dart';
 import 'package:ict_hack/ui_kit/universal_moodal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
+import '../../../ui_kit/constants/app_colors.dart';
+
 class SingleCategoryWidget extends StatelessWidget {
   SingleCategoryWidget({
     Key? key,
@@ -81,6 +83,7 @@ class SingleCategoryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var appBar = AppBar(
       title: Text(categoryName),
+      backgroundColor: AppColors.primary,
       actions: [
         IconButton(
           onPressed: () {
@@ -120,7 +123,7 @@ class SingleCategoryWidget extends StatelessWidget {
                   return InkWell(
                     onTap: () {},
                     child: Container(
-                      color: Colors.blue[100],
+                      color: AppColors.primary,
                       width: (MediaQuery.of(context).size.width - 60) / 3,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -144,10 +147,14 @@ class SingleCategoryWidget extends StatelessWidget {
                             child: Text(
                               items[index].name,
                               overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                              ),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(12),
+                            padding: const EdgeInsets.all(8),
                             child: Text(
                               items[index].rarity,
                               overflow: TextOverflow.ellipsis,
