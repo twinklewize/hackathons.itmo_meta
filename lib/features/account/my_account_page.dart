@@ -55,12 +55,14 @@ class MyAccountPage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      user.nickname,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
+                    Flexible(
+                      child: Text(
+                        user.nickname,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     TextButton(
@@ -174,7 +176,7 @@ class MyAccountPage extends StatelessWidget {
             ),
             const Divider(height: 1),
 
-            // Рейтинг
+            // Друзья
             Align(
               alignment: Alignment.centerLeft,
               child: InkWell(
@@ -185,7 +187,7 @@ class MyAccountPage extends StatelessWidget {
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: const Text(
-                      "Рейтинг пользователей",
+                      "Друзья",
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.blue,

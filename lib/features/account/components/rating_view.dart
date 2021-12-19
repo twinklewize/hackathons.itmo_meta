@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ict_hack/ui_kit/widgets/custom_avatar.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/user_provider.dart';
 import '../../../ui_kit/avatar/achievment_information.dart';
 import '../../../ui_kit/constants/app_colors.dart';
+import '../../../ui_kit/half_long_button.dart';
+import '../../../ui_kit/universal_moodal_bottom_sheet.dart';
+import '../../../ui_kit/widgets/custom_text_field.dart';
 
 class RatingView extends StatelessWidget {
   const RatingView({Key? key}) : super(key: key);
@@ -17,17 +19,31 @@ class RatingView extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          child: Text(
-            'Рейтинг друзей',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child: Row(
+            children: [
+              const Text(
+                'Рейтинг друзей',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+              const Spacer(),
+              TextButton(
+                onPressed: () => onNewFriendButton(context),
+                child: const Text(
+                  'Добавить',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.green,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-        // const Divider(height: 1),
         Expanded(
           child: ListView.builder(
             itemCount: AchievmentInformation.achievments.length,
@@ -40,7 +56,13 @@ class RatingView extends StatelessWidget {
                 height: 92,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: AppColors.backgroundLight,
+                  color: index == 0
+                      ? AppColors.yellow.withOpacity(0.75)
+                      : (index == 1
+                          ? AppColors.green.withOpacity(0.5)
+                          : (index == 2
+                              ? AppColors.blue.withOpacity(0.5)
+                              : AppColors.backgroundLight)),
                 ),
                 child: Row(
                   children: [
@@ -112,6 +134,59 @@ class RatingView extends StatelessWidget {
           ),
         )
       ],
+    );
+  }
+
+  void onNewFriendButton(BuildContext context) {
+    showModalBottomSheet<void>(
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (BuildContext context) {
+        return UniversaModalBottomSheet(
+          color: AppColors.backgroundLight,
+          title: "Добавить друга",
+          content: Column(
+            children: [
+              const SizedBox(height: 16),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: CustomTextField(
+                  controller: TextEditingController(),
+                  textInputType: TextInputType.number,
+                  hintText: 'ИСУ:',
+                ),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: HalfLongButton(
+                      fillColor: AppColors.red,
+                      titleTextColor: Colors.white,
+                      title: 'Нет',
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: HalfLongButton(
+                      fillColor: AppColors.green,
+                      titleTextColor: Colors.white,
+                      title: 'Да',
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 }

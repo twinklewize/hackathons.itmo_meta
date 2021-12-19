@@ -9,6 +9,11 @@ class UserAvatarAssets {
     Color(0xFFE6E0C2),
     Color(0xFFBAE2E4),
     Color(0xFFFFD08A),
+    //
+    Color(0xFFFA7982),
+    Color(0xFF9CC569),
+    Color(0xFFF9DD7C),
+    Color(0xFFB3ADF7),
   ];
 
   static const String blush = 'assets/avatar/blush/blush.png';

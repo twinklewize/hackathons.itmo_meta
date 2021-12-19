@@ -333,51 +333,49 @@ class ColorGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return GridView.builder(
       padding: const EdgeInsets.all(16),
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 120,
-          crossAxisSpacing: 16,
-          childAspectRatio: 1,
-          mainAxisSpacing: 16,
-        ),
-        itemCount: colors.length,
-        itemBuilder: (BuildContext ctx, index) {
-          return GestureDetector(
-            onTap: () => onTap(index),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Stack(
-                children: [
-                  Container(
-                    width: 120,
-                    height: 120,
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                        color: colors[index],
-                        borderRadius: BorderRadius.circular(20)),
-                  ),
-                  id == index
-                      ? Container(
-                          width: 120,
-                          height: 120,
-                          color: Colors.black12,
-                          child: const Center(
-                            child: Icon(
-                              Icons.check_rounded,
-                              color: Colors.white,
-                              size: 32,
-                            ),
-                          ),
-                        )
-                      : Container(),
-                ],
-              ),
-            ),
-          );
-        },
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 120,
+        crossAxisSpacing: 16,
+        childAspectRatio: 1,
+        mainAxisSpacing: 16,
       ),
+      itemCount: colors.length,
+      itemBuilder: (BuildContext ctx, index) {
+        return GestureDetector(
+          onTap: () => onTap(index),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Stack(
+              children: [
+                Container(
+                  width: 120,
+                  height: 120,
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                      color: colors[index],
+                      borderRadius: BorderRadius.circular(20)),
+                ),
+                id == index
+                    ? Container(
+                        width: 120,
+                        height: 120,
+                        color: Colors.black12,
+                        child: const Center(
+                          child: Icon(
+                            Icons.check_rounded,
+                            color: Colors.white,
+                            size: 32,
+                          ),
+                        ),
+                      )
+                    : Container(),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -397,61 +395,59 @@ class AssetGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return GridView.builder(
       padding: const EdgeInsets.all(16),
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 120,
-          crossAxisSpacing: 16,
-          childAspectRatio: 1,
-          mainAxisSpacing: 16,
-        ),
-        itemCount: haveEmptyElement ? assets.length + 1 : assets.length,
-        itemBuilder: (BuildContext ctx, index) {
-          return GestureDetector(
-            onTap: () {
-              (haveEmptyElement && index == assets.length)
-                  ? onTap(-1)
-                  : onTap(index);
-            },
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Stack(
-                children: [
-                  Container(
-                    width: 120,
-                    height: 120,
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                        color: AppColors.primary,
-                        borderRadius: BorderRadius.circular(20)),
-                    child: (haveEmptyElement && index == assets.length)
-                        ? const SizedBox()
-                        : Image.asset(
-                            assets[index],
-                            fit: BoxFit.contain,
-                          ),
-                  ),
-                  id == index || (index == assets.length && id == -1)
-                      ? Container(
-                          width: 120,
-                          height: 120,
-                          color: Colors.black12,
-                          child: const Center(
-                            child: Icon(
-                              Icons.check_rounded,
-                              color: Colors.white,
-                              size: 32,
-                            ),
-                          ),
-                        )
-                      : Container(),
-                ],
-              ),
-            ),
-          );
-        },
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 120,
+        crossAxisSpacing: 16,
+        childAspectRatio: 1,
+        mainAxisSpacing: 16,
       ),
+      itemCount: haveEmptyElement ? assets.length + 1 : assets.length,
+      itemBuilder: (BuildContext ctx, index) {
+        return GestureDetector(
+          onTap: () {
+            (haveEmptyElement && index == assets.length)
+                ? onTap(-1)
+                : onTap(index);
+          },
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Stack(
+              children: [
+                Container(
+                  width: 120,
+                  height: 120,
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                      color: AppColors.primary,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: (haveEmptyElement && index == assets.length)
+                      ? const SizedBox()
+                      : Image.asset(
+                          assets[index],
+                          fit: BoxFit.contain,
+                        ),
+                ),
+                id == index || (index == assets.length && id == -1)
+                    ? Container(
+                        width: 120,
+                        height: 120,
+                        color: Colors.black12,
+                        child: const Center(
+                          child: Icon(
+                            Icons.check_rounded,
+                            color: Colors.white,
+                            size: 32,
+                          ),
+                        ),
+                      )
+                    : Container(),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
