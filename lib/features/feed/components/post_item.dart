@@ -21,7 +21,8 @@ class PostItem extends StatelessWidget {
   ) {
     return Container(
       decoration: BoxDecoration(
-        color: uLikedOrNot ? Colors.red.withOpacity(0.1) : AppColors.primary,
+        color:
+            uLikedOrNot ? AppColors.yellow.withOpacity(0.5) : AppColors.white,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Material(

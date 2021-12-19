@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ict_hack/features/market/components/ingame_categories_widget.dart';
 import 'package:ict_hack/features/market/components/real_categories_widget.dart';
 
@@ -25,10 +26,20 @@ class MarketPage extends StatelessWidget {
               ],
             ),
           ],
-          bottom: const TabBar(
+          bottom: TabBar(
             tabs: [
-              Tab(icon: Icon(Icons.shop_rounded)),
-              Tab(icon: Icon(Icons.people_alt)),
+              Tab(
+                icon: SvgPicture.asset(
+                  'assets/icons/shopping-bag.svg',
+                  color: AppColors.black,
+                ),
+              ),
+              Tab(
+                icon: SvgPicture.asset(
+                  'assets/icons/users.svg',
+                  color: AppColors.black,
+                ),
+              ),
             ],
           ),
         ),

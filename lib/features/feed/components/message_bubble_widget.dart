@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ict_hack/ui_kit/constants/app_colors.dart';
 
 class MessageBubbleWidget extends StatelessWidget {
   final String msg;
@@ -23,7 +24,7 @@ class MessageBubbleWidget extends StatelessWidget {
             ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
-              color: const Color.fromRGBO(44, 45, 46, 1),
+              color: AppColors.primary,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,7 +51,7 @@ class MessageBubbleWidget extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: Colors.black,
+                          color: AppColors.white,
                           borderRadius: BorderRadius.circular(25),
                         ),
                         child: const Center(
@@ -61,7 +62,7 @@ class MessageBubbleWidget extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: Colors.black,
+                          color: AppColors.white,
                           borderRadius: BorderRadius.circular(25),
                         ),
                         child: const Center(
@@ -117,7 +118,7 @@ class MessageBubbleWidget extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                color: const Color.fromRGBO(44, 45, 46, 1),
+                color: AppColors.background,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,7 +132,7 @@ class MessageBubbleWidget extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
-                        color: Colors.white,
+                        color: AppColors.textColor,
                       ),
                     ),
                   ),
@@ -144,7 +145,7 @@ class MessageBubbleWidget extends StatelessWidget {
                           TextSpan(
                             text: msg + "",
                             style: const TextStyle(
-                              color: Colors.white,
+                              color: AppColors.textColor,
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
                             ),
@@ -164,7 +165,7 @@ class MessageBubbleWidget extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            color: Colors.black,
+                            color: AppColors.white,
                             borderRadius: BorderRadius.circular(25),
                           ),
                           child: const Center(
@@ -175,7 +176,7 @@ class MessageBubbleWidget extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            color: Colors.black,
+                            color: AppColors.white,
                             borderRadius: BorderRadius.circular(25),
                           ),
                           child: const Center(

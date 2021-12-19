@@ -23,6 +23,7 @@ class SingleCategoryWidget extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return UniversaModalBottomSheet(
+          color: AppColors.backgroundLight,
           title: "Вы уверены?",
           content: Column(
             children: [
@@ -55,7 +56,7 @@ class SingleCategoryWidget extends StatelessWidget {
                       Navigator.of(context).pop();
                     },
                     child: HalfLongButton(
-                      fillColor: Colors.red,
+                      fillColor: AppColors.red,
                       titleTextColor: Colors.white,
                       title: 'Нет',
                     ),
@@ -65,7 +66,7 @@ class SingleCategoryWidget extends StatelessWidget {
                       Navigator.of(context).pop();
                     },
                     child: HalfLongButton(
-                      fillColor: Colors.green,
+                      fillColor: AppColors.green,
                       titleTextColor: Colors.white,
                       title: 'Да',
                     ),
@@ -122,9 +123,17 @@ class SingleCategoryWidget extends StatelessWidget {
                 itemBuilder: (BuildContext ctx, index) {
                   return InkWell(
                     onTap: () {},
+                    borderRadius: BorderRadius.circular(16),
                     child: Container(
-                      color: AppColors.primary,
                       width: (MediaQuery.of(context).size.width - 60) / 3,
+                      decoration: BoxDecoration(
+                        color: items[index].rarity == 'Legendary'
+                            ? AppColors.yellow
+                            : (items[index].rarity == 'Rare'
+                                ? AppColors.red
+                                : AppColors.blue),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -147,9 +156,10 @@ class SingleCategoryWidget extends StatelessWidget {
                             child: Text(
                               items[index].name,
                               overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
+                              style: const TextStyle(
+                                color: AppColors.textColor,
                                 fontSize: 16,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ),
@@ -158,6 +168,9 @@ class SingleCategoryWidget extends StatelessWidget {
                             child: Text(
                               items[index].rarity,
                               overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: AppColors.textColor.withOpacity(0.5),
+                              ),
                             ),
                           ),
                           GestureDetector(
@@ -167,7 +180,7 @@ class SingleCategoryWidget extends StatelessWidget {
                             child: SizedBox(
                               height: 36,
                               child: HalfLongButton(
-                                fillColor: Colors.green,
+                                fillColor: AppColors.green,
                                 titleTextColor: Colors.white,
                                 title: items[index].amount.toString() +
                                     (items[index].rarity == "Legendary"

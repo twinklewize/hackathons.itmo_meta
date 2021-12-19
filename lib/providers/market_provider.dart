@@ -19,7 +19,7 @@ class MarketProvider with ChangeNotifier {
       name: 'Худи 2',
       imageAsset: 'assets/images/hoodie_2.png',
       type: 'Одежда',
-      rarity: 'Basic',
+      rarity: 'Legendary',
       amount: 35,
     ),
     EnventoryItem(

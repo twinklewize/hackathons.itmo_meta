@@ -21,7 +21,6 @@ class ChatsPage extends StatelessWidget {
     );
     return Scaffold(
       appBar: appBar,
-      backgroundColor: AppColors.backgroundLight,
       body: Column(
         children: [
           const SizedBox(height: 4),

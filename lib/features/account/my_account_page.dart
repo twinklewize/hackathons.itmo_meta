@@ -40,54 +40,60 @@ class MyAccountPage extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 12),
-            CustomAvatar(
-              avatarHeight: MediaQuery.of(context).size.width - 24,
-              userAvatar: user.userAvatar,
-            ),
-            const SizedBox(height: 24),
-            const Divider(thickness: 1),
 
-            // Редактор персонажа
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Flexible(
-                      child: Text(
-                        user.nickname,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute<void>(
-                            builder: (BuildContext context) => CustomAvatarView(
-                              newAvatar: false,
-                              nick: user.nickname,
-                            ),
-                          ),
-                        );
-                      },
-                      child: const Text(
-                        'изменить',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.blue,
-                        ),
-                      ),
-                    ),
-                  ],
+            Stack(
+              clipBehavior: Clip.none,
+              alignment: AlignmentDirectional.topCenter,
+              children: [
+                CustomAvatar(
+                  avatarHeight: MediaQuery.of(context).size.width - 24,
+                  userAvatar: user.userAvatar,
                 ),
+                Positioned(
+                  bottom: -16,
+                  child: Container(
+                    width: 140,
+                    height: 48,
+                    decoration: BoxDecoration(
+                        color: AppColors.yellow,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: AppColors.background,
+                          width: 2,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.textColor.withOpacity(0.15),
+                            blurRadius: 2,
+                            offset: const Offset(-2, 2),
+                          )
+                        ]),
+                    child: const Center(
+                      child: Text(
+                        'Lvl. 7',
+                        style: TextStyle(
+                          color: AppColors.black,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 32),
+
+            // Nickname
+            Text(
+              user.nickname,
+              style: const TextStyle(
+                fontSize: 22,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
               ),
             ),
+            const SizedBox(height: 12),
             const Divider(height: 1),
 
             // ИСУ
@@ -97,20 +103,20 @@ class MyAccountPage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Row(
                   children: [
-                    const Text(
-                      "Ваш номер в ИСУ:",
+                    Text(
+                      "Номер ИСУ:",
                       style: TextStyle(
                         fontSize: 16,
-                        color: Colors.black,
+                        color: Colors.black.withOpacity(0.75),
                       ),
                     ),
                     const SizedBox(width: 12),
                     Text(
                       user.id.toString(),
                       style: const TextStyle(
-                        fontSize: 20,
+                        fontSize: 16,
                         color: Colors.black,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                     const Spacer(),
@@ -125,6 +131,38 @@ class MyAccountPage extends StatelessWidget {
                       ),
                     ),
                   ],
+                ),
+              ),
+            ),
+            const Divider(height: 1),
+
+            // Редактор персонажа
+            Align(
+              alignment: Alignment.centerLeft,
+              child: InkWell(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) => CustomAvatarView(
+                        newAvatar: false,
+                        nick: user.nickname,
+                      ),
+                    ),
+                  );
+                },
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: const Text(
+                      "Редактор персонажа",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -198,8 +236,8 @@ class MyAccountPage extends StatelessWidget {
               ),
             ),
 
-            const Divider(thickness: 1, height: 1),
-            const SizedBox(height: 24),
+            // const Divider(height: 1),
+            const SizedBox(height: 12),
             for (var post in Provider.of<MyFeedProvider>(context).posts)
               GestureDetector(
                 onTap: () {

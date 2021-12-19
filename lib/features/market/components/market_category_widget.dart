@@ -30,7 +30,10 @@ class MarketCategoryWidget extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
         child: Container(
-          color: AppColors.primary,
+          decoration: BoxDecoration(
+            color: AppColors.yellow.withOpacity(0.75),
+            borderRadius: BorderRadius.circular(16),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -67,8 +70,8 @@ class MarketCategoryWidget extends StatelessWidget {
                               top: 6, left: 12, bottom: 12, right: 12),
                           child: Text(
                             description,
-                            style: const TextStyle(
-                              color: Colors.black,
+                            style: TextStyle(
+                              color: Colors.black.withOpacity(0.5),
                               fontSize: 14,
                               fontWeight: FontWeight.normal,
                             ),

@@ -68,14 +68,16 @@ class RatingView extends StatelessWidget {
                   children: [
                     // Картинка
                     Container(
-                      decoration:
-                          BoxDecoration(shape: BoxShape.circle, boxShadow: [
-                        BoxShadow(
-                          color: AppColors.textColor.withOpacity(0.15),
-                          blurRadius: 2,
-                          offset: const Offset(-2, 2),
-                        )
-                      ]),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.textColor.withOpacity(0.15),
+                            blurRadius: 2,
+                            offset: const Offset(-2, 2),
+                          )
+                        ],
+                      ),
                       child: CustomAvatar(
                         userAvatar: user.userAvatar,
                         avatarHeight: 64,
