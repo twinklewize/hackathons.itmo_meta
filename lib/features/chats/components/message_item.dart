@@ -44,7 +44,7 @@ class _MessageItemV2State extends State<MessageItemV2> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           elevation: 0,
-                          color: AppColors.primary,
+                          color: AppColors.primary.withOpacity(0.4),
                           child: Stack(
                             children: <Widget>[
                               // text (real + placeholder)

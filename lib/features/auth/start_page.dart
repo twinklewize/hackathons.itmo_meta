@@ -20,13 +20,13 @@ class StartPage extends StatelessWidget {
             const Spacer(),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 24),
-              margin: const EdgeInsets.symmetric(horizontal: 64),
+              margin: const EdgeInsets.symmetric(horizontal: 56),
               child: const Text(
-                'Общайтесь со своими друзьями в метавселенной ИТМО',
+                'Общайтесь \nсо своими друзьями\n в метавселенной ИТМО',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
+                  color: AppColors.black,
+                  fontSize: 20,
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -44,23 +44,23 @@ class StartPage extends StatelessWidget {
                   );
                 },
                 child: HalfLongButton(
-                  fillColor: AppColors.primary,
-                  titleTextColor: Colors.black,
+                  fillColor: AppColors.primary.withOpacity(0.5),
+                  titleTextColor: AppColors.black,
                   title: 'Регистрация',
                 ),
               ),
             ),
             const SizedBox(height: 12),
-            const Center(
-              child: Text(
-                'or',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ),
+            // const Center(
+            //   child: Text(
+            //     'или',
+            //     style: TextStyle(
+            //       color: AppColors.black,
+            //       fontSize: 18,
+            //       fontWeight: FontWeight.w400,
+            //     ),
+            //   ),
+            // ),
             const SizedBox(height: 12),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -74,8 +74,8 @@ class StartPage extends StatelessWidget {
                   );
                 },
                 child: HalfLongButton(
-                  fillColor: AppColors.primary,
-                  titleTextColor: Colors.black,
+                  fillColor: AppColors.yellow,
+                  titleTextColor: AppColors.black,
                   title: 'Вход',
                 ),
               ),

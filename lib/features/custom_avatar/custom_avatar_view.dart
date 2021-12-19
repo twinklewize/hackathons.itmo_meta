@@ -420,7 +420,7 @@ class AssetGridView extends StatelessWidget {
                   height: 120,
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                      color: AppColors.primary,
+                      color: AppColors.primary.withOpacity(0.5),
                       borderRadius: BorderRadius.circular(20)),
                   child: (haveEmptyElement && index == assets.length)
                       ? const SizedBox()

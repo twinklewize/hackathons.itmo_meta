@@ -112,8 +112,8 @@ class RegisterPage extends StatelessWidget {
                       },
                       child: HalfLongButton(
                         title: "Регистрация",
-                        fillColor: AppColors.primary,
-                        titleTextColor: Colors.black,
+                        fillColor: AppColors.primary.withOpacity(0.5),
+                        titleTextColor: AppColors.black,
                       ),
                     ),
                   ),

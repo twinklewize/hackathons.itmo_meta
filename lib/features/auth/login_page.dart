@@ -111,8 +111,8 @@ class LoginPage extends StatelessWidget {
                       },
                       child: HalfLongButton(
                         title: "Вход",
-                        fillColor: AppColors.primary,
-                        titleTextColor: Colors.black,
+                        fillColor: AppColors.yellow,
+                        titleTextColor: AppColors.black,
                       ),
                     ),
                   ),

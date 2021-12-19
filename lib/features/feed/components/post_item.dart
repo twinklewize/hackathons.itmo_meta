@@ -3,7 +3,9 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../../../entities/post.dart';
 import '../../../providers/feed_provider.dart';
+import '../../../providers/user_provider.dart';
 import '../../../ui_kit/constants/app_colors.dart';
+import '../../../ui_kit/widgets/custom_avatar.dart';
 
 class PostItem extends StatelessWidget {
   PostItem({
@@ -89,7 +91,11 @@ class PostItem extends StatelessWidget {
                           Container(
                             width: 42.0,
                             height: 42.0,
-                            child: CircleAvatar(),
+                            child: CustomAvatar(
+                                userAvatar: Provider.of<UserProvider>(context,
+                                        listen: false)
+                                    .userEntity
+                                    .userAvatar),
                           ),
                           // draw a green badge
                           Positioned(

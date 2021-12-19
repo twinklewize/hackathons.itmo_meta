@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:ict_hack/ui_kit/widgets/custom_avatar.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/chats_provider.dart';
+import '../../../providers/user_provider.dart';
 import '../../../ui_kit/constants/app_colors.dart';
 
 // ignore: must_be_immutable
@@ -34,7 +36,6 @@ class ChatRowItem extends StatelessWidget {
   Widget build(BuildContext context) {
     // инициализация чата со всеми его сообщениями
     var chat = Provider.of<ChatsProvider>(context).chats[index];
-
     return Column(
       children: [
         const Divider(height: 1),
@@ -46,7 +47,10 @@ class ChatRowItem extends StatelessWidget {
           child: Row(
             children: [
               // avatar with online indicator
-              const CircleAvatar(radius: 24),
+              CustomAvatar(
+                  userAvatar: Provider.of<UserProvider>(context, listen: false)
+                      .userEntity
+                      .userAvatar),
 
               const SizedBox(width: 12),
 
@@ -57,17 +61,20 @@ class ChatRowItem extends StatelessWidget {
                 children: [
                   // с кем чат
                   const Text(
-                    'username',
+                    'Klimenkov',
                     style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w400,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
                       color: AppColors.chatRowTextColor,
                     ),
                   ),
+                  const SizedBox(height: 4),
                   // последнее сообщение и его дата/время
                   Container(
                     width: MediaQuery.of(context).size.width * 2 / 3,
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
                       children: [
                         Flexible(
                           child: Text(
@@ -77,10 +84,11 @@ class ChatRowItem extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                             softWrap: true,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
-                              color: AppColors.chatRowTextColor,
+                              color:
+                                  AppColors.chatRowTextColor.withOpacity(0.75),
                             ),
                           ),
                         ),
@@ -94,10 +102,11 @@ class ChatRowItem extends StatelessWidget {
                                           .last
                                           .dateTime,
                                     ),
-                                style: const TextStyle(
-                                  fontSize: 16,
+                                style: TextStyle(
+                                  fontSize: 14,
                                   fontWeight: FontWeight.w400,
-                                  color: AppColors.chatRowTextColor,
+                                  color: AppColors.chatRowTextColor
+                                      .withOpacity(0.5),
                                 ),
                               )
                             : Container(),
