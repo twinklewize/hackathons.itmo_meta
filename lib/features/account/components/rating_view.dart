@@ -140,6 +140,7 @@ class RatingView extends StatelessWidget {
   }
 
   void onNewFriendButton(BuildContext context) {
+    final friendController = TextEditingController();
     showModalBottomSheet<void>(
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
@@ -154,7 +155,7 @@ class RatingView extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: CustomTextField(
-                  controller: TextEditingController(),
+                  controller: friendController,
                   textInputType: TextInputType.number,
                   hintText: 'ИСУ:',
                 ),

@@ -38,7 +38,6 @@ class ChatRowItem extends StatelessWidget {
     var chat = Provider.of<ChatsProvider>(context).chats[index];
     return Column(
       children: [
-        const Divider(height: 1),
         Container(
           width: MediaQuery.of(context).size.width,
           padding: const EdgeInsets.all(12),
@@ -118,6 +117,9 @@ class ChatRowItem extends StatelessWidget {
             ],
           ),
         ),
+        Provider.of<ChatsProvider>(context).chats.length != (index + 1)
+            ? const Divider(height: 1)
+            : const SizedBox(),
       ],
     );
   }

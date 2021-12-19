@@ -23,7 +23,6 @@ class ChatsPage extends StatelessWidget {
       appBar: appBar,
       body: Column(
         children: [
-          const SizedBox(height: 4),
           // список чатов
           Expanded(
             child: ListView.builder(

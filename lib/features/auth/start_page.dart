@@ -26,7 +26,7 @@ class StartPage extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: AppColors.black,
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: FontWeight.w400,
                 ),
               ),

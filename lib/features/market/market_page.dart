@@ -19,7 +19,21 @@ class MarketPage extends StatelessWidget {
           actions: [
             Row(
               children: [
-                Text('1000' + ' 🪙'),
+                RichText(
+                  text: const TextSpan(
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: '1000 ', // non-emoji characters
+                      ),
+                      TextSpan(
+                        text: '🪙', // emoji characters
+                        style: TextStyle(
+                          fontFamily: 'EmojiOne',
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 SizedBox(width: 12),
                 Text('35' + ' 💎'),
                 SizedBox(width: 12),

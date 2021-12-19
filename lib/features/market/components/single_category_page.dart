@@ -30,13 +30,26 @@ class SingleCategoryWidget extends StatelessWidget {
               const SizedBox(height: 12),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Text(
-                  "Вы уверены, что хотите купить " +
-                      item.name +
-                      " за " +
-                      item.amount.toString() +
-                      (item.rarity == "Legendary" ? ' 💎' : ' 🪙' + "?"),
+                child: RichText(
                   textAlign: TextAlign.center,
+                  text: TextSpan(
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: "Вы уверены, что хотите купить " +
+                            item.name +
+                            " за " +
+                            item.amount.toString(), // non-emoji characters
+                      ),
+                      TextSpan(
+                        text: item.rarity == "Legendary"
+                            ? ' 💎'
+                            : ' 🪙', // emoji characters
+                        style: const TextStyle(
+                          fontFamily: 'EmojiOne',
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 8),
@@ -115,7 +128,7 @@ class SingleCategoryWidget extends StatelessWidget {
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 200,
-                  childAspectRatio: 2 / 2,
+                  childAspectRatio: 1,
                   crossAxisSpacing: 8,
                   mainAxisSpacing: 8,
                 ),
@@ -125,7 +138,6 @@ class SingleCategoryWidget extends StatelessWidget {
                     onTap: () {},
                     borderRadius: BorderRadius.circular(16),
                     child: Container(
-                      width: (MediaQuery.of(context).size.width - 60) / 3,
                       decoration: BoxDecoration(
                         color: items[index].rarity == 'Legendary'
                             ? AppColors.yellow
@@ -137,8 +149,9 @@ class SingleCategoryWidget extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
+                          const Spacer(flex: 2),
                           Padding(
-                            padding: const EdgeInsets.all(12),
+                            padding: const EdgeInsets.symmetric(horizontal: 12),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
                               child: SizedBox(
@@ -151,6 +164,7 @@ class SingleCategoryWidget extends StatelessWidget {
                               ),
                             ),
                           ),
+                          const Spacer(flex: 2),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 12),
                             child: Text(
@@ -163,8 +177,9 @@ class SingleCategoryWidget extends StatelessWidget {
                               ),
                             ),
                           ),
+                          const Spacer(),
                           Padding(
-                            padding: const EdgeInsets.all(8),
+                            padding: const EdgeInsets.symmetric(horizontal: 12),
                             child: Text(
                               items[index].rarity,
                               overflow: TextOverflow.ellipsis,
@@ -173,22 +188,28 @@ class SingleCategoryWidget extends StatelessWidget {
                               ),
                             ),
                           ),
+                          const Spacer(flex: 2),
                           GestureDetector(
                             onTap: () {
                               onBuyButtonPressed(context, items[index]);
                             },
-                            child: SizedBox(
-                              height: 36,
-                              child: HalfLongButton(
-                                fillColor: AppColors.green,
-                                titleTextColor: Colors.white,
-                                title: items[index].amount.toString() +
-                                    (items[index].rarity == "Legendary"
-                                        ? ' 💎'
-                                        : ' 🪙'),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 12),
+                              child: SizedBox(
+                                height: 32,
+                                child: HalfLongButton(
+                                  fillColor: AppColors.green,
+                                  titleTextColor: Colors.white,
+                                  title: items[index].amount.toString(),
+                                  emoji: (items[index].rarity == "Legendary"
+                                      ? ' 💎'
+                                      : ' 🪙'),
+                                ),
                               ),
                             ),
                           ),
+                          const Spacer(flex: 2),
                         ],
                       ),
                     ),

@@ -136,7 +136,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       top: false,
                       child: Container(
                         width: MediaQuery.of(context).size.width,
-                        color: AppColors.primary.withOpacity(0.5),
+                        color: AppColors.primary.withOpacity(0.4),
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.end,

@@ -112,7 +112,7 @@ class InventoryGridView extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 120,
+          maxCrossAxisExtent: 130,
           mainAxisSpacing: 16,
           crossAxisSpacing: 16,
           childAspectRatio: 3 / 4,
@@ -131,11 +131,12 @@ class InventoryGridView extends StatelessWidget {
                 child: Container(
                   width: 120,
                   height: 120,
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(20)),
                   child: Column(
                     children: [
+                      const Spacer(flex: 4),
                       SizedBox(
                         width: 60,
                         height: 60,
@@ -144,7 +145,7 @@ class InventoryGridView extends StatelessWidget {
                           fit: BoxFit.contain,
                         ),
                       ),
-                      const SizedBox(height: 12),
+                      const Spacer(flex: 3),
                       const Text(
                         'Футболка',
                         overflow: TextOverflow.ellipsis,
@@ -154,7 +155,7 @@ class InventoryGridView extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      const SizedBox(height: 4),
+                      const Spacer(flex: 1),
                       Text(
                         'Редкий',
                         overflow: TextOverflow.ellipsis,
@@ -162,6 +163,7 @@ class InventoryGridView extends StatelessWidget {
                           color: AppColors.textColor.withOpacity(0.5),
                         ),
                       ),
+                      const Spacer(flex: 4),
                     ],
                   ),
                 ),
@@ -174,6 +176,7 @@ class InventoryGridView extends StatelessWidget {
   }
 
   void onItemButton(BuildContext context) {
+    final priceController = TextEditingController();
     showModalBottomSheet<void>(
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
@@ -193,7 +196,7 @@ class InventoryGridView extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: CustomTextField(
-                  controller: TextEditingController(),
+                  controller: priceController,
                   textInputType: TextInputType.number,
                   hintText: 'Цена:',
                 ),

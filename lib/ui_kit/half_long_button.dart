@@ -6,11 +6,13 @@ class HalfLongButton extends StatelessWidget {
     required this.fillColor,
     required this.titleTextColor,
     required this.title,
+    this.emoji = '',
   }) : super(key: key);
 
   Color fillColor;
   Color titleTextColor;
   String title;
+  String emoji;
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +26,23 @@ class HalfLongButton extends StatelessWidget {
         color: fillColor,
       ),
       child: Center(
-        child: Text(
-          title,
-          style: TextStyle(
-            color: titleTextColor,
-            fontSize: 16,
+        child: RichText(
+          text: TextSpan(
+            children: <TextSpan>[
+              TextSpan(
+                text: title,
+                style: TextStyle(
+                  color: titleTextColor,
+                  fontSize: 16,
+                ),
+              ),
+              TextSpan(
+                text: emoji,
+                style: const TextStyle(
+                  fontFamily: 'EmojiOne',
+                ),
+              ),
+            ],
           ),
         ),
       ),

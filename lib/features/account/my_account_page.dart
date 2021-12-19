@@ -25,11 +25,25 @@ class MyAccountPage extends StatelessWidget {
       backgroundColor: AppColors.primary,
       actions: [
         Row(
-          children: const [
-            Text('1000 🪙'),
-            SizedBox(width: 12),
-            Text('35 💎'),
-            SizedBox(width: 12),
+          children: [
+            RichText(
+              text: const TextSpan(
+                children: <TextSpan>[
+                  TextSpan(
+                    text: '1000 ', // non-emoji characters
+                  ),
+                  TextSpan(
+                    text: '🪙', // emoji characters
+                    style: TextStyle(
+                      fontFamily: 'EmojiOne',
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 12),
+            const Text('35 💎'),
+            const SizedBox(width: 12),
           ],
         ),
       ],
