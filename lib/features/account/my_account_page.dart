@@ -3,8 +3,13 @@ import 'package:ict_hack/features/account/components/my_post_item.dart';
 import 'package:ict_hack/features/custom_avatar/custom_avatar_view.dart';
 import 'package:ict_hack/providers/my_account_provider.dart';
 import 'package:ict_hack/providers/user_provider.dart';
+import 'package:ict_hack/ui_kit/constants/app_colors.dart';
 import 'package:ict_hack/ui_kit/widgets/custom_avatar.dart';
 import 'package:provider/provider.dart';
+
+import 'components/achivments_view.dart';
+import 'components/inventory.dart';
+import 'components/rating_view.dart';
 
 class MyAccountPage extends StatelessWidget {
   const MyAccountPage({Key? key}) : super(key: key);
@@ -37,6 +42,8 @@ class MyAccountPage extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             const Divider(thickness: 1),
+
+            // Редактор персонажа
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(
@@ -64,7 +71,7 @@ class MyAccountPage extends StatelessWidget {
                         );
                       },
                       child: const Text(
-                        'изм.',
+                        'изменить',
                         style: TextStyle(
                           fontSize: 16,
                           color: Colors.blue,
@@ -75,7 +82,9 @@ class MyAccountPage extends StatelessWidget {
                 ),
               ),
             ),
-            const Divider(),
+            const Divider(height: 1),
+
+            // ИСУ
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(
@@ -113,13 +122,153 @@ class MyAccountPage extends StatelessWidget {
                 ),
               ),
             ),
-            const Divider(thickness: 1),
+            const Divider(height: 1),
+
+            // Инвентарь
+            Align(
+              alignment: Alignment.centerLeft,
+              child: InkWell(
+                onTap: () => showInventoryBottomSheet(context),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: const Text(
+                      "Инвентарь",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const Divider(height: 1),
+
+            // Достижения
+            Align(
+              alignment: Alignment.centerLeft,
+              child: InkWell(
+                onTap: () => showAchivmentsBottomSheet(context),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: const Text(
+                      "Ваши достижения",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const Divider(height: 1),
+
+            // Рейтинг
+            Align(
+              alignment: Alignment.centerLeft,
+              child: InkWell(
+                onTap: () => showRatingBottomSheet(context),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: const Text(
+                      "Рейтинг пользователей",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            const Divider(thickness: 1, height: 1),
             const SizedBox(height: 24),
             for (var post in Provider.of<MyAccountProvider>(context).posts)
               MyPostItem(post: post),
           ],
         ),
       ),
+    );
+  }
+
+  Future<dynamic> showInventoryBottomSheet(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    return showModalBottomSheet(
+      backgroundColor: AppColors.background,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(14),
+          topRight: Radius.circular(14),
+        ),
+      ),
+      isScrollControlled: true,
+      context: context,
+      builder: (context) {
+        return FractionallySizedBox(
+          heightFactor: (mediaQuery.size.height - mediaQuery.padding.top) /
+              mediaQuery.size.height,
+          child: TabsWithInventoryElements(),
+        );
+      },
+    );
+  }
+
+  Future<dynamic> showAchivmentsBottomSheet(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    return showModalBottomSheet(
+      backgroundColor: AppColors.background,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(14),
+          topRight: Radius.circular(14),
+        ),
+      ),
+      isScrollControlled: true,
+      context: context,
+      builder: (context) {
+        return FractionallySizedBox(
+          heightFactor: (mediaQuery.size.height - mediaQuery.padding.top) /
+              mediaQuery.size.height,
+          child: Container(
+            height: 100,
+            width: 100,
+            child: AchivmentsView(),
+          ),
+        );
+      },
+    );
+  }
+
+  Future<dynamic> showRatingBottomSheet(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    return showModalBottomSheet(
+      backgroundColor: AppColors.background,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(14),
+          topRight: Radius.circular(14),
+        ),
+      ),
+      isScrollControlled: true,
+      context: context,
+      builder: (context) {
+        return FractionallySizedBox(
+          heightFactor: (mediaQuery.size.height - mediaQuery.padding.top) /
+              mediaQuery.size.height,
+          child: RatingView(),
+        );
+      },
     );
   }
 }

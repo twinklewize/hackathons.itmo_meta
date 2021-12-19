@@ -14,6 +14,18 @@ class UserProvider with ChangeNotifier {
     ),
     nickname: '',
     id: 28564,
+    inventoryItems: [
+      // EnventoryItem(
+      //   id: id,
+      //   name: name,
+      //   uniqId: uniqId,
+      //   imageAsset: imageAsset,
+      //   type: type,
+      //   rarity: rarity,
+      //   amount: amount,
+      // )
+    ],
+    achievments: [0, 1, 3],
   );
 
   void setUserAvatar(UserAvatarEntity userAvatar) {

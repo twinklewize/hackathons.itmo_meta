@@ -19,6 +19,7 @@ class UserAvatarAssets {
     'assets/avatar/bodies/body_2.png',
     'assets/avatar/bodies/body_3.png',
     'assets/avatar/bodies/body_4.png',
+    'assets/avatar/bodies/harry_potter_body.png',
   ];
 
   static const List<String> brows = [
@@ -48,22 +49,26 @@ class UserAvatarAssets {
   static const List<String> glasses = [
     'assets/avatar/glasses/gray_glasses.png',
     'assets/avatar/glasses/red_glasses.png',
+    'assets/avatar/glasses/harry_potter_glasses.png',
   ];
 
   static const List<String> hairstyles = [
     'assets/avatar/hairstyles/hair_1.png',
     'assets/avatar/hairstyles/hair_2.png',
     'assets/avatar/hairstyles/hair_3.png',
+    'assets/avatar/hairstyles/harry_potter_hair.png',
   ];
 
   static const List<String> boots = [
     'assets/clothes/boots/boots_1.png',
     'assets/clothes/boots/boots_2.png',
+    'assets/clothes/boots/harry_potter_boots.png',
   ];
 
   static const List<String> pants = [
     'assets/clothes/pants/pants_1.png',
     'assets/clothes/pants/pants_2.png',
+    'assets/clothes/pants/harry_potter_pants.png',
   ];
 
   static const List<String> tShirts = [
@@ -71,6 +76,7 @@ class UserAvatarAssets {
     'assets/clothes/t_shirts/t_shirt_2.png',
     'assets/clothes/t_shirts/t_shirt_3.png',
     'assets/clothes/t_shirts/t_shirt_4.png',
+    'assets/clothes/t_shirts/harry_potter_t_shirt.png',
   ];
 
   static const List<String> mouths = [

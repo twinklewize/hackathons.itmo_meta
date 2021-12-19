@@ -42,4 +42,24 @@ class CustomAvatarViewModel with ChangeNotifier {
   void setNickname(String nick) {
     nickname = nick;
   }
+
+  void setTShirtId(int id) {
+    userAvatar.tShirtId = id;
+    notifyListeners();
+  }
+
+  void setPantsId(int id) {
+    userAvatar.pantsId = id;
+    notifyListeners();
+  }
+
+  void setGlassesId(int id) {
+    userAvatar.glassesId = id;
+    notifyListeners();
+  }
+
+  void setBootsId(int id) {
+    userAvatar.bootsId = id;
+    notifyListeners();
+  }
 }
