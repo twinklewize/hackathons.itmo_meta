@@ -8,7 +8,7 @@ class MyAccountProvider with ChangeNotifier {
       authorId: '1',
       title: "xxx_nagibatel_3000_xxx",
       dateTime: DateTime.now(),
-      text: 'Hello poeple who love gay boundage website!',
+      text: 'Я собрал себе аватар! Похоже на Гарри Поттера?',
       imageUrl:
           'https://sun9-55.userapi.com/impg/yzEsDVaVhV-ebMDVI0jIrPWsjm4GApqOuFyaSg/VDyljHgdPWg.jpg?size=300x300&quality=96&sign=abc16935d0c090e6ff7ef4a8b3faf8ef&type=album',
       howManyComments: 0,
