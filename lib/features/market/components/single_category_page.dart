@@ -30,26 +30,13 @@ class SingleCategoryWidget extends StatelessWidget {
               const SizedBox(height: 12),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: RichText(
+                child: Text(
+                  "Вы уверены, что хотите купить " +
+                      item.name +
+                      " за " +
+                      item.amount.toString() +
+                      (item.rarity == "Legendary" ? ' 💎' : ' 💵' + "?"),
                   textAlign: TextAlign.center,
-                  text: TextSpan(
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: "Вы уверены, что хотите купить " +
-                            item.name +
-                            " за " +
-                            item.amount.toString(), // non-emoji characters
-                      ),
-                      TextSpan(
-                        text: item.rarity == "Legendary"
-                            ? ' 💎'
-                            : ' 🪙', // emoji characters
-                        style: const TextStyle(
-                          fontFamily: 'EmojiOne',
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
               ),
               const SizedBox(height: 8),
@@ -204,7 +191,7 @@ class SingleCategoryWidget extends StatelessWidget {
                                   title: items[index].amount.toString(),
                                   emoji: (items[index].rarity == "Legendary"
                                       ? ' 💎'
-                                      : ' 🪙'),
+                                      : ' 💵'),
                                 ),
                               ),
                             ),
