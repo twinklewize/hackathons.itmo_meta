@@ -103,8 +103,9 @@ class CustomAvatar extends StatelessWidget {
               : const SizedBox(),
 
           // Объем волос
-          UserAvatarAssets.hairstyles[userAvatar.hairstyleId] !=
-                  'assets/avatar/hairstyles/harry_potter_hair.png'
+          userAvatar.hairstyleId != -1 &&
+                  UserAvatarAssets.hairstyles[userAvatar.hairstyleId] !=
+                      'assets/avatar/hairstyles/harry_potter_hair.png'
               ? Positioned(
                   left: 0.125 * avatarHeight,
                   right: 0.125 * avatarHeight,
